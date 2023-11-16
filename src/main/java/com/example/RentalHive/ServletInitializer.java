@@ -1,4 +1,4 @@
-package com.example.RentalHive.web.rest;
+package com.example.RentalHive;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
