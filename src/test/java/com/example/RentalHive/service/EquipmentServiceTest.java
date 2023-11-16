@@ -1,10 +1,10 @@
-package com.example.RentalHive.service;
+package com.example.RentalHive.Service;
 
 import com.example.RentalHive.Entities.Equipment;
 import com.example.RentalHive.Entities.StatusEnum;
 import com.example.RentalHive.Entities.Type;
 import com.example.RentalHive.repository.EquipmentRepository;
-import com.example.RentalHive.service.imp.EquipmentServiceImp;
+import com.example.RentalHive.Service.imp.EquipmentServiceImp;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class EquipmentServiceTest {
@@ -127,6 +128,42 @@ class EquipmentServiceTest {
         assertNotNull(list);
         assertEquals(5, list.size());
     }
+
+
+    @Test
+    void TestSaveEquipmentValidWithSuccess(){
+        Equipment newEquipment = Equipment.builder()
+                .id(9L)
+                .name("New Equipment")
+                .type(Type.builder().id(3L).name("three").build())
+                .status(StatusEnum.dispo)
+                .price(50.0)
+                .build();
+
+        when(repository.save(any(Equipment.class))).thenReturn(newEquipment);
+
+        Equipment savedEquipment = service.save(newEquipment);
+
+        assertNotNull(savedEquipment);
+    }
+
+    @Test
+    void testSaveValidEquipmentWithNullType() {
+
+    }
+
+
+    @Test
+    void testSaveEquipmentWithNullName() {
+    }
+
+
+    @Test
+    void testSaveEquipmentWithNegativePrice() {
+
+
+    }
+
 
     private List<Equipment> getMocksEquipments(){
         return equipments;

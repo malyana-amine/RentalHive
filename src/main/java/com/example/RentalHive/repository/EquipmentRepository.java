@@ -14,4 +14,5 @@ import java.util.List;
 public interface EquipmentRepository  extends JpaRepository<Equipment, Long> {
     @Query("SELECT e FROM Equipment e WHERE e.status = :status OR e.type = :type OR e.name LIKE %:name%")
     List<Equipment> findByStatusAndTypeAndName(@Param("status") StatusEnum status, @Param("type") Type type, @Param("name") String name);
+
 }

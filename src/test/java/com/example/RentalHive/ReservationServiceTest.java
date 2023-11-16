@@ -2,7 +2,7 @@ package com.example.RentalHive;
 
 import com.example.RentalHive.Entities.*;
 import com.example.RentalHive.repository.ReservationRepository;
-import com.example.RentalHive.service.imp.ReservationServiceImp;
+import com.example.RentalHive.Service.imp.ReservationServiceImp;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;

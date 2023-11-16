@@ -1,4 +1,4 @@
-package com.example.RentalHive.service;
+package com.example.RentalHive.Service;
 
 public interface ExampleService {
 }

@@ -22,7 +22,7 @@ public class Reservation {
     private Double total_price;
 
     @ManyToOne
-    @JoinColumn(name = "user")
+    @JoinColumn(name = "user_id")
     private Users user;
 
     @ManyToOne

@@ -1,4 +1,4 @@
-package com.example.RentalHive.service.imp;
+package com.example.RentalHive.Service.imp;
 
 public class TypeServiceImp {
 }

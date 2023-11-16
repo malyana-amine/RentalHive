@@ -1,4 +1,4 @@
-package com.example.RentalHive.service;
+package com.example.RentalHive.Service;
 
 import com.example.RentalHive.Entities.Equipment;
 import com.example.RentalHive.Entities.StatusEnum;
@@ -10,4 +10,7 @@ import java.util.List;
 @Service
 public interface EquipmentService {
     List<Equipment> findByStatusTypeName(StatusEnum status, Type type, String name);
+
+    Equipment save(Equipment equipment);
+
 }
