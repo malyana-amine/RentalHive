@@ -16,11 +16,9 @@ public class Equipment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-
-    @ManyToOne
-    @JoinColumn(name = "type")
-    private Type type;
-    private StatusEnum status;
+    private EquipmentStatus status;
     private Double price;
 
+    @ManyToOne
+    private Type type;
 }

@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Entity
 @Data
 @NoArgsConstructor
@@ -16,11 +15,10 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String userName;
+    private String username;
     private String email;
     private String password;
 
     @ManyToOne
-    @JoinColumn(name = "role")
     private Role role;
 }
