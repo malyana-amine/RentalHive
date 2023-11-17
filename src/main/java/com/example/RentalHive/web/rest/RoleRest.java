@@ -21,20 +21,20 @@ public class RoleRest {
     @GetMapping
     public ResponseEntity<ApiResponse<List<Role>>> getAllRoles() {
         List<Role> roles = service.findAll();
-        return new ResponseEntity<>(ApiResponse.success( null, roles), HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success( "roles retrieved successful", roles));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<Role>> getRoleById(@PathVariable Long id) {
         Optional<Role> role = service.findById(id);
-        return role.map(value -> new ResponseEntity<>(ApiResponse.success(null, value), HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(ApiResponse.error("role not found"), HttpStatus.NOT_FOUND));
+        return role.map(value -> ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(null, value)))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiResponse.error("role not found")));
     }
 
     @PostMapping
     public ResponseEntity<ApiResponse<Role>> createRole(@RequestBody Role role) {
         Role savedRole = service.save(role);
-        return new ResponseEntity<>(ApiResponse.success("role created successful", savedRole), HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("role created successful", savedRole));
     }
 
     @PutMapping("/{id}")
@@ -43,16 +43,16 @@ public class RoleRest {
         if (existingRole.isPresent()) {
             role.setId(id);
             Role updatedRole = service.update(role);
-            return new ResponseEntity<>(ApiResponse.success("role updated successful", updatedRole), HttpStatus.OK);
+            return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success("role updated successful", updatedRole));
         } else {
-            return new ResponseEntity<>(ApiResponse.error("role not found"), HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiResponse.error("role not found"));
         }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Role>> deleteRole(@PathVariable Long id) {
         Optional<Role> deletedRole = service.delete(id);
-        return deletedRole.map(value -> new ResponseEntity<>(ApiResponse.success("role deleted successful", value), HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(ApiResponse.error("role not found"), HttpStatus.NOT_FOUND));
+        return deletedRole.map(value -> ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success("role deleted successful", value)))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiResponse.error("role not found")));
     }
 }

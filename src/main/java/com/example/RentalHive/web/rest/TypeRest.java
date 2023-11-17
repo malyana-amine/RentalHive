@@ -21,20 +21,20 @@ public class TypeRest {
     @GetMapping
     public ResponseEntity<ApiResponse<List<Type>>> getAllTypes() {
         List<Type> types = service.findAll();
-        return new ResponseEntity<>(ApiResponse.success( null, types), HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success( "types retrieved successful", types));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<Type>> getTypeById(@PathVariable Long id) {
         Optional<Type> type = service.findById(id);
-        return type.map(value -> new ResponseEntity<>(ApiResponse.success(null, value), HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(ApiResponse.error("type not found"), HttpStatus.NOT_FOUND));
+        return type.map(value -> ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(null, value)))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiResponse.error("type not found")));
     }
 
     @PostMapping
     public ResponseEntity<ApiResponse<Type>> createType(@RequestBody Type type) {
         Type savedType = service.save(type);
-        return new ResponseEntity<>(ApiResponse.success("type created successful", savedType), HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("type created successful", savedType));
     }
 
     @PutMapping("/{id}")
@@ -43,16 +43,16 @@ public class TypeRest {
         if (existingType.isPresent()) {
             type.setId(id);
             Type updatedType = service.update(type);
-            return new ResponseEntity<>(ApiResponse.success("type updated successful", updatedType), HttpStatus.OK);
+            return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success("type updated successful", updatedType));
         } else {
-            return new ResponseEntity<>(ApiResponse.error("type not found"), HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiResponse.error("type not found"));
         }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Type>> deleteType(@PathVariable Long id) {
         Optional<Type> deletedType = service.delete(id);
-        return deletedType.map(value -> new ResponseEntity<>(ApiResponse.success("type deleted successful", value), HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(ApiResponse.error("type not found"), HttpStatus.NOT_FOUND));
+        return deletedType.map(value -> ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success("type deleted successful", value)))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiResponse.error("type not found")));
     }
 }
