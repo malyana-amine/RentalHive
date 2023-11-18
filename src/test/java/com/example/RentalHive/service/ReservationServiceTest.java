@@ -1,11 +1,13 @@
-package com.example.RentalHive;
+package com.example.RentalHive.service;
 
 import com.example.RentalHive.Entities.*;
 import com.example.RentalHive.repository.ReservationRepository;
 import com.example.RentalHive.service.imp.ReservationServiceImp;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 
 import java.time.LocalDate;
 
@@ -17,7 +19,7 @@ public class ReservationServiceTest {
 
     @BeforeEach
     void beforeEach(){
-        reservationServiceImp = new ReservationServiceImp();
+         reservationServiceImp = new ReservationServiceImp(reservationRepository);
     }
     @Test
     void whenNameIsNullThenThrowError() {
