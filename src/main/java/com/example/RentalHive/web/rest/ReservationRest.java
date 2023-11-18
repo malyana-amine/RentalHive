@@ -1,6 +1,8 @@
 package com.example.RentalHive.web.rest;
 
 import com.example.RentalHive.Entities.*;
+import com.example.RentalHive.repository.EquipmentRepository;
+import com.example.RentalHive.repository.UserRepository;
 import com.example.RentalHive.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -13,35 +15,19 @@ import java.util.List;
 @RequestMapping("/api/reservation")
 public class ReservationRest {
     private final ReservationService reservationService;
+    private final UserRepository userRepository;
+    private final EquipmentRepository equipmentRepository;
+
     @PostMapping("/save")
     public Reservation saveReservation(@RequestBody Reservation reservation){
-        Type type = Type.builder()
-                .name("trax")
-                .build();
-        Equipment equipment = Equipment.builder()
-                .name("camion")
-                .price(100.0)
-                .status(EquipmentStatus.AVAILABLE)
-                .type(type)
-                .build();
-        Role role = Role.builder()
-                .name("ROLE_ADMIN")
-                .build();
-        Users user = Users.builder()
-                .username("mouad")
-                .email("mouad@gmail.com")
-                .password("test@@")
-                .role(role)
-                .build();
-        Reservation reservation1 = Reservation.builder()
-                .startDate( LocalDate.now())
-                .endDate(LocalDate.now().plusWeeks(1))
-                .totalPrice(700.0)
-                .user(user)
-                .equipment(equipment)
-                .build();
+        reservation.setUser(
+                userRepository.findById(reservation.getUser().getId()).orElseThrow()
+        );
+        reservation.setEquipment(
+            equipmentRepository.findById(reservation.getEquipment().getId()).orElseThrow()
+        );
 
-        return reservationService.save(reservation1);
+        return reservationService.save(reservation);
     }
 
     @GetMapping("/")
