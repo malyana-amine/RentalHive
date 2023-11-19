@@ -9,19 +9,18 @@ import jakarta.validation.ValidatorFactory;
 import java.util.Set;
 
 public class EquipementValidation {
-    public static void validateEquipment(Equipment equipment) {
 
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
+    public static void validateEquipmentForSave(Equipment equipment) {
+        if (equipment.getName() == null) {
+            throw new IllegalArgumentException("Equipment name cannot be null");
+        }
 
-        Set<ConstraintViolation<Equipment>> violations = validator.validate(equipment);
+        if (equipment.getType() == null) {
+            throw new IllegalArgumentException("Equipment type cannot be null");
+        }
 
-        if (!violations.isEmpty()) {
-            StringBuilder errorMessage = new StringBuilder("Invalid Equipment object:");
-            for (ConstraintViolation<Equipment> violation : violations) {
-                errorMessage.append(" ").append(violation.getMessage());
-            }
-            throw new IllegalArgumentException(errorMessage.toString());
+        if (equipment.getPrice() != null && equipment.getPrice() < 0) {
+            throw new IllegalArgumentException("Equipment price cannot be negative");
         }
     }
 }

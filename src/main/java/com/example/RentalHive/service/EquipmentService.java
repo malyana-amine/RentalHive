@@ -17,7 +17,7 @@ public interface EquipmentService {
 
     List<Equipment> findByStatusTypeName(EquipmentStatus status, Type type, String name);
 
-    Equipment update(Equipment equipment);
+    Equipment updateEntireEquipment(Equipment equipment);
 
     Optional<Equipment>  findById(Long id);
 }

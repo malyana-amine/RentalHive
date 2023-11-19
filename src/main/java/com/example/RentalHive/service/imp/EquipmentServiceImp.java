@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 
-import static com.example.RentalHive.Helpers.EquipementValidation.validateEquipment;
+import static com.example.RentalHive.Helpers.EquipementValidation.validateEquipmentForSave;
+import static com.example.RentalHive.Helpers.EquipmentUpdater.updateEquipment;
 
 @Component @RequiredArgsConstructor
 public class EquipmentServiceImp implements EquipmentService {
@@ -24,17 +25,8 @@ public class EquipmentServiceImp implements EquipmentService {
 
     @Override
      public Equipment save(Equipment equipment){
-        if (equipment.getName() == null) {
-            throw new IllegalArgumentException("Equipment name cannot be null");
-        }
 
-        if (equipment.getType() == null) {
-            throw new IllegalArgumentException("Equipment type cannot be null");
-        }
-
-        if (equipment.getPrice() != null && equipment.getPrice() < 0) {
-            throw new IllegalArgumentException("Equipment price cannot be negative");
-        }
+        validateEquipmentForSave(equipment);
 
         return repository.save(equipment);
     }
@@ -42,12 +34,16 @@ public class EquipmentServiceImp implements EquipmentService {
 
 
   @Override
-    public Equipment update(Equipment equipment){
+    public Equipment updateEntireEquipment(Equipment equipment){
 
-        validateEquipment(equipment);
 
-        return repository.save(equipment);
-    }
+      validateEquipmentForSave(equipment);
+
+      Optional<Equipment> optionalExistingEquipment = repository.findById(equipment.getId());
+
+      return updateEquipment(optionalExistingEquipment, equipment);
+  }
+
 
     @Override
 

@@ -35,30 +35,13 @@ public class EquipmentRest {
 
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Equipment> updateEquipment(
-            @PathVariable Long id,
-            @RequestBody Equipment updatedAttributes) {
+    @PutMapping("/update")
+    public ResponseEntity<Equipment> updateEquipment(@RequestBody Equipment updatedEquipment) {
         try {
-            Optional<Equipment> optionalExistingEquipment = equipmentService.findById(id);
-
-            if (optionalExistingEquipment.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-
-            Equipment existingEquipment = optionalExistingEquipment.get();
-
-            if (updatedAttributes.getName() != null) {
-                existingEquipment.setName(updatedAttributes.getName());
-            }
-
-            Equipment updatedEquipment = equipmentService.update(existingEquipment);
-
-            return new ResponseEntity<>(updatedEquipment, HttpStatus.OK);
-
+            Equipment result = equipmentService.updateEntireEquipment(updatedEquipment);
+            return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
