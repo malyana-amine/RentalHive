@@ -17,16 +17,11 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate start_date;
-    private LocalDate end_date;
-    private Double total_price;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private Double totalPrice;
 
-    @ManyToOne
     @JoinColumn(name = "user_id")
-    private Users user;
-
     @ManyToOne
-    @JoinColumn(name = "equipment")
     private Equipment equipment;
-
 }

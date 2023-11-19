@@ -26,11 +26,12 @@ public class Equipment {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "type")
+    @JoinColumn(name = "type_id")
     @NotNull(message = "The type of the equipment can not be null")
     private Type type;
 
-    private StatusEnum status;
+
+    private EquipmentStatus status;
 
     @Positive(message = "The rent can not be negative or zero")
     private Double price;
