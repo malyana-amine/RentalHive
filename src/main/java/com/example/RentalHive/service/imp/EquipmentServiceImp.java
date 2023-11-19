@@ -5,16 +5,13 @@ import com.example.RentalHive.Entities.EquipmentStatus;
 import com.example.RentalHive.Entities.Type;
 import com.example.RentalHive.repository.EquipmentRepository;
 import com.example.RentalHive.Service.EquipmentService;
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
-import jakarta.validation.ValidatorFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import com.example.RentalHive.Exceptions.EquipmentAlreadyExistsException;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
+
+
+import static com.example.RentalHive.Helpers.EquipementValidation.validateEquipment;
 
 @Component @RequiredArgsConstructor
 public class EquipmentServiceImp implements EquipmentService {
@@ -42,21 +39,7 @@ public class EquipmentServiceImp implements EquipmentService {
         return repository.save(equipment);
     }
 
-    private void validateEquipment(Equipment equipment) {
 
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
-
-        Set<ConstraintViolation<Equipment>> violations = validator.validate(equipment);
-
-        if (!violations.isEmpty()) {
-            StringBuilder errorMessage = new StringBuilder("Invalid Equipment object:");
-            for (ConstraintViolation<Equipment> violation : violations) {
-                errorMessage.append(" ").append(violation.getMessage());
-            }
-            throw new IllegalArgumentException(errorMessage.toString());
-        }
-    }
 
   @Override
     public Equipment update(Equipment equipment){

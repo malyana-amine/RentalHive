@@ -49,7 +49,7 @@ class EquipmentServiceTest {
         assertNotNull(list);
         assertEquals(8, list.size());
     }
-
+//
 //    @Test
 //    void TestFindByStatusTypeNameToFilterWithNoAvailableDataMatch() {
 //        Mockito.doReturn(this.getMocksEquipments(null, null, null)).when(repository).findByStatusAndTypeAndName(any(), any(), any());

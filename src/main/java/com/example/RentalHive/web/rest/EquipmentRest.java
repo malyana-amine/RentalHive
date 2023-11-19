@@ -42,7 +42,7 @@ public class EquipmentRest {
         try {
             Optional<Equipment> optionalExistingEquipment = equipmentService.findById(id);
 
-            if (!optionalExistingEquipment.isPresent()) {
+            if (optionalExistingEquipment.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
 
