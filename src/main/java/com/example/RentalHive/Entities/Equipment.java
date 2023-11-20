@@ -1,5 +1,6 @@
 package com.example.RentalHive.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -27,6 +28,7 @@ public class Equipment {
 
     @ManyToOne
     @JoinColumn(name = "type_id")
+    @JsonBackReference
     @NotNull(message = "The type of the equipment can not be null")
     private Type type;
 

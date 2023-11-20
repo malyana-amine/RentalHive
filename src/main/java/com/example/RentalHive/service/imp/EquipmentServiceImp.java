@@ -18,8 +18,7 @@ public class EquipmentServiceImp implements EquipmentService {
     private final EquipmentRepository repository;
     @Override
     public List<Equipment> findByStatusTypeName(EquipmentStatus status, Type type, String name) {
-//        return repository.findByStatusAndTypeAndName(status, type, name);
-        return null;
+        return repository.findByStatusAndTypeAndName(status, type, name);
     }
 
     @Override
