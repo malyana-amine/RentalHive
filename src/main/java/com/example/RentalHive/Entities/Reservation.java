@@ -21,7 +21,9 @@ public class Reservation {
     private LocalDate endDate;
     private Double totalPrice;
 
-    @JoinColumn(name = "user_id")
+    @ManyToOne
+    private Users user;
+
     @ManyToOne
     private Equipment equipment;
 }
