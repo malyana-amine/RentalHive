@@ -1,85 +1,91 @@
 package com.example.RentalHive;
 
-import com.example.RentalHive.Entities.*;
+import com.example.RentalHive.Entities.Equipment;
+import com.example.RentalHive.Entities.Reservation;
+import com.example.RentalHive.Entities.Users;
+import com.example.RentalHive.repository.EquipmentRepository;
 import com.example.RentalHive.repository.ReservationRepository;
-import com.example.RentalHive.Service.imp.ReservationServiceImp;
-import org.junit.jupiter.api.AfterAll;
+import com.example.RentalHive.repository.UserRepository;
+import com.example.RentalHive.service.imp.ReservationServiceImp;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
 
 import java.time.LocalDate;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
 
-public class ReservationServiceTest {
-    private ReservationServiceImp reservationServiceImp;
+
+class ReservationServiceImpTest {
+
+    @Mock
     private ReservationRepository reservationRepository;
 
+    @Mock
+    private UserRepository userRepository;
+
+    @Mock
+    private EquipmentRepository equipmentRepository;
+
+    @InjectMocks
+    private ReservationServiceImp reservationService;
+
     @BeforeEach
-    void beforeEach(){
-        reservationServiceImp = new ReservationServiceImp();
+    void setUp() {
+        MockitoAnnotations.initMocks(this);
     }
-//    @Test
-//    void whenNameIsNullThenThrowError() {
-//        Type type = Type.builder()
-//                .name("trax")
-//                .build();
-//        Equipment equipment = Equipment.builder()
-//                .name("camion")
-//                .price(100.0)
-//                .status(EquipmentStatus.AVAILABLE)
-//                .type(type)
-//                .build();
-//        Role role = Role.builder()
-//                .name("ROLE_ADMIN")
-//                .build();
-//        Users user = Users.builder()
-//                .username("mouad")
-//                .email("mouad@gmail.com")
-//                .password("test@@")
-//                .role(role)
-//                .build();
-//        Reservation reservation = Reservation.builder()
-//                .startDate(LocalDate.now())
-//                .endDate(LocalDate.now().plusWeeks(1))
-//                .totalPrice(700.0)
-//                .user(user)
-//                .equipment(equipment)
-//                .build();
-//
-//        assertThrows(IllegalArgumentException.class, () -> reservationServiceImp.reservation(reservation));
-//    }
-    @Test
-    void whenEndDateIsNullThenThrowError() {
-        Reservation reservation = Reservation.builder()
-                .endDate(null)
-                .build();
 
-        assertThrows(IllegalArgumentException.class, () -> reservationServiceImp.checkNullInputs(reservation));
+    @Test
+    void testSave() {
+        // Arrange
+        Reservation reservation = new Reservation();
+        reservation.setStartDate(LocalDate.now());
+        reservation.setEndDate(LocalDate.now().plusDays(2));
+
+        Long equipmentId = 1L;
+        Long userId = 2L;
+
+        Equipment equipment = new Equipment();
+        equipment.setPrice(10.0);
+
+        Users user = new Users();
+
+        when(equipmentRepository.findById(equipmentId)).thenReturn(Optional.of(equipment));
+        when(userRepository.findById(userId)).thenReturn(Optional.of(user));
+
+        // Act
+        reservationService.save(reservation, equipmentId, userId);
+
+        // Assert
+        verify(equipmentRepository, times(1)).findById(equipmentId);
+        verify(userRepository, times(1)).findById(userId);
+        verify(reservationRepository, times(1)).save(reservation);
+
+        // Add more assertions based on your business logic and requirements
     }
     @Test
-    void whenStartDateIsNullThenThrowError() {
-        Reservation reservation = Reservation.builder()
-                .endDate(null)
-                .build();
+    public void testSaveReservationInPast() {
+        Reservation reservation = new Reservation();
+        reservation.setStartDate(LocalDate.now().minusDays(1));
+        reservation.setEndDate(LocalDate.now().minusDays(3));
 
-        assertThrows(IllegalArgumentException.class, () -> reservationServiceImp.checkNullInputs(reservation));
+        assertThrows(IllegalArgumentException.class, () ->
+                reservationService.save(reservation, 1L, 1L));
     }
+
     @Test
-    void whenStartDateGraterThenEndDayThrowError() {
-        Reservation reservation = Reservation.builder()
-                .startDate(LocalDate.now())
-                .endDate(LocalDate.now().minusDays(1))
-                .build();
+    public void testSaveInvalidDateRange() {
+        Reservation reservation = new Reservation();
+        reservation.setStartDate(LocalDate.now().plusDays(3));
+        reservation.setEndDate(LocalDate.now().plusDays(1));
 
-        assertThrows(IllegalArgumentException.class, () -> reservationServiceImp.checkNullInputs(reservation));
-    }
-
-    @AfterAll
-    static void afterAllMsg(){
-        System.out.println(" ------------------------------------------------------------------------------");
-        System.out.println(" ----------- All the tests of authentication are passed successfully ----------");
-        System.out.println(" ------------------------------------------------------------------------------");
+        assertThrows(IllegalArgumentException.class, () ->
+                reservationService.save(reservation, 1L, 1L));
     }
 
 }
