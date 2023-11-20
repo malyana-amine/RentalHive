@@ -3,7 +3,7 @@ package com.example.RentalHive.web.rest;
 
 import com.example.RentalHive.Entities.Equipment;
 
-import com.example.RentalHive.Service.EquipmentService;
+import com.example.RentalHive.service.EquipmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.example.RentalHive.Service;
+package com.example.RentalHive.service;
 
 import com.example.RentalHive.Entities.Equipment;
 import com.example.RentalHive.Entities.EquipmentStatus;
@@ -20,7 +20,6 @@ public interface EquipmentService {
     Equipment updateEntireEquipment(Equipment equipment);
 
     Optional<Equipment>  findById(Long id);
-
-
+    
     boolean removeById(Long id);
 }

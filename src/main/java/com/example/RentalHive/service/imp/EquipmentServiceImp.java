@@ -1,14 +1,13 @@
-package com.example.RentalHive.Service.imp;
+package com.example.RentalHive.service.imp;
 
 import com.example.RentalHive.Entities.Equipment;
 import com.example.RentalHive.Entities.EquipmentStatus;
 import com.example.RentalHive.Entities.Type;
 import com.example.RentalHive.repository.EquipmentRepository;
-import com.example.RentalHive.Service.EquipmentService;
+import com.example.RentalHive.service.EquipmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 

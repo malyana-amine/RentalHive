@@ -22,7 +22,7 @@ public class Type {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "type", cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "type", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Equipment> Equipment;
 

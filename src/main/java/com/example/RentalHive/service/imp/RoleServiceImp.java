@@ -1,8 +1,8 @@
-package com.example.RentalHive.Service.imp;
+package com.example.RentalHive.service.imp;
 
 import com.example.RentalHive.Entities.Role;
 import com.example.RentalHive.repository.RoleRepository;
-import com.example.RentalHive.Service.RoleService;
+import com.example.RentalHive.service.RoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

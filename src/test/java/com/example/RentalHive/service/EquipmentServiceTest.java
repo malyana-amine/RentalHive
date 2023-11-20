@@ -1,10 +1,10 @@
-package com.example.RentalHive.Service;
+package com.example.RentalHive.service;
 
 import com.example.RentalHive.Entities.Equipment;
 import com.example.RentalHive.Entities.EquipmentStatus;
 import com.example.RentalHive.Entities.Type;
 import com.example.RentalHive.repository.EquipmentRepository;
-import com.example.RentalHive.Service.imp.EquipmentServiceImp;
+import com.example.RentalHive.service.imp.EquipmentServiceImp;
 
 import org.junit.jupiter.api.Disabled;
 

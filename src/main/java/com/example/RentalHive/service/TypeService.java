@@ -1,8 +1,7 @@
-package com.example.RentalHive.Service;
+package com.example.RentalHive.service;
 
 import com.example.RentalHive.Entities.Type;
 import org.springframework.stereotype.Service;
-import com.example.RentalHive.Service.CrudService;
 
 
 @Service
