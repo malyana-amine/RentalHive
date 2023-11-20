@@ -25,11 +25,7 @@ public class Reservation {
     private Users user;
 
     @ManyToOne
-    private  Users user;
-
-
-
-
+    private  Equipment equipment;
 
 
 }

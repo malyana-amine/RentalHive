@@ -13,7 +13,8 @@ import java.util.Optional;
 
 import static com.example.RentalHive.Helpers.EquipementValidation.validateEquipmentForSave;
 
-@Component @RequiredArgsConstructor
+@Component
+@RequiredArgsConstructor
 public class EquipmentServiceImp implements EquipmentService {
     private final EquipmentRepository repository;
     @Override
@@ -29,8 +30,6 @@ public class EquipmentServiceImp implements EquipmentService {
 
         return repository.save(equipment);
     }
-
-
 
   @Override
     public Equipment updateEntireEquipment(Equipment equipment){
@@ -60,6 +59,16 @@ public class EquipmentServiceImp implements EquipmentService {
         return repository.findById(id);
     }
 
+    @Override
+    public void removeById(Long id){
+        Optional<Equipment> optionalEquipment = repository.findById(id);
+
+        if (optionalEquipment.isPresent()) {
+            repository.deleteById(id);
+        } else {
+            throw new IllegalArgumentException("Equipment not found with ID: " + id);
+        }
+    }
 
 
 }

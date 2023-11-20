@@ -2,7 +2,7 @@ package com.example.RentalHive.Service.imp;
 
 import com.example.RentalHive.Entities.Type;
 import com.example.RentalHive.repository.TypeRepository;
-import com.example.RentalHive.service.TypeService;
+import com.example.RentalHive.Service.TypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

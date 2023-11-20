@@ -20,4 +20,7 @@ public interface EquipmentService {
     Equipment updateEntireEquipment(Equipment equipment);
 
     Optional<Equipment>  findById(Long id);
+
+
+    void removeById(Long id);
 }

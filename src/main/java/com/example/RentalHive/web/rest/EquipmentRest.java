@@ -61,4 +61,17 @@ public class EquipmentRest {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteEquipmentById(@PathVariable Long id) {
+        try {
+            equipmentService.removeById(id);
+            String successMessage = "Equipment with ID " + id + " deleted successfully.";
+            return ResponseEntity.ok(successMessage);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }

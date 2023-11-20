@@ -6,7 +6,7 @@ import com.example.RentalHive.Entities.Users;
 import com.example.RentalHive.repository.EquipmentRepository;
 import com.example.RentalHive.repository.ReservationRepository;
 import com.example.RentalHive.repository.UserRepository;
-import com.example.RentalHive.service.imp.ReservationServiceImp;
+import com.example.RentalHive.Service.imp.ReservationServiceImp;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

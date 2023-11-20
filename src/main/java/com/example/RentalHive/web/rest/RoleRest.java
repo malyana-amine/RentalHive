@@ -1,7 +1,7 @@
 package com.example.RentalHive.web.rest;
 
 import com.example.RentalHive.Entities.Role;
-import com.example.RentalHive.service.RoleService;
+import com.example.RentalHive.Service.RoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
