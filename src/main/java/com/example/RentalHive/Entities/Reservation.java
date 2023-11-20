@@ -23,5 +23,11 @@ public class Reservation {
 
     @JoinColumn(name = "user_id")
     @ManyToOne
-    private Equipment equipment;
+    private  Users user;
+
+
+
+
+
+
 }
