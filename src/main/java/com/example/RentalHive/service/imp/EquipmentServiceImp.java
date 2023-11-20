@@ -7,6 +7,8 @@ import com.example.RentalHive.repository.EquipmentRepository;
 import com.example.RentalHive.Service.EquipmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,13 +62,16 @@ public class EquipmentServiceImp implements EquipmentService {
     }
 
     @Override
-    public void removeById(Long id){
+    public boolean removeById(Long id){
         Optional<Equipment> optionalEquipment = repository.findById(id);
 
         if (optionalEquipment.isPresent()) {
-            repository.deleteById(id);
+            Equipment equipment = optionalEquipment.get();
+            repository.delete(equipment);
+            return true;
         } else {
-            throw new IllegalArgumentException("Equipment not found with ID: " + id);
+//            throw new IllegalArgumentException("Equipment not found with ID: " + id);
+            return false;
         }
     }
 

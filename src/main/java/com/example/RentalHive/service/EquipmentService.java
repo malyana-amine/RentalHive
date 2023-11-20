@@ -22,5 +22,5 @@ public interface EquipmentService {
     Optional<Equipment>  findById(Long id);
 
 
-    void removeById(Long id);
+    boolean removeById(Long id);
 }

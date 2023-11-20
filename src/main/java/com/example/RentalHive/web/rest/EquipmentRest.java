@@ -63,15 +63,11 @@ public class EquipmentRest {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteEquipmentById(@PathVariable Long id) {
-        try {
-            equipmentService.removeById(id);
-            String successMessage = "Equipment with ID " + id + " deleted successfully.";
-            return ResponseEntity.ok(successMessage);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    public String deleteEquipmentById(@PathVariable Long id) {
+        if(equipmentService.removeById(id)){
+            return "Equipment deleted successfully";
+        } else {
+            return "Equipment not found";
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.RentalHive.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,6 +26,7 @@ public class Reservation {
     private Users user;
 
     @ManyToOne
+    @JsonIgnore
     private  Equipment equipment;
 
 

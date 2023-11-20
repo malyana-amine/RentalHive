@@ -1,5 +1,6 @@
 package com.example.RentalHive.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,6 +23,7 @@ public class Type {
     private String name;
 
     @OneToMany(mappedBy = "type", cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Equipment> Equipment;
 
 
