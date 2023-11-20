@@ -49,91 +49,90 @@ class EquipmentServiceTest {
         assertNotNull(list);
         assertEquals(8, list.size());
     }
-//
-//    @Test
-//    void TestFindByStatusTypeNameToFilterWithNoAvailableDataMatch() {
-//        Mockito.doReturn(this.getMocksEquipments(null, null, null)).when(repository).findByStatusAndTypeAndName(any(), any(), any());
-//        List<Equipment> list = service.findByStatusTypeName(null, null, null);
-//
-//        assertNotNull(list);
-//        assertEquals(0, list.size());
-//    }
-//
-//    @Test
-//    void TestFindByStatusTypeNameToFilterWithName() {
-//        String name = "8";
-//
-//        Mockito.doReturn(this.getMocksEquipments(null, null, name)).when(repository).findByStatusAndTypeAndName(any(), any(), any());
-//        List<Equipment> list = service.findByStatusTypeName(null, null, name);
-//
-//        assertNotNull(list);
-//        assertEquals(1, list.size());
-//        assertEquals("equipment 8", list.get(0).getName());
-//    }
-//
-//    @Test
-//    void TestFindByStatusTypeNameToFilterWithStatusAvailable() {
-//        EquipmentStatus status = EquipmentStatus.AVAILABLE;
-//
-//        Mockito.doReturn(this.getMocksEquipments(status, null, null)).when(repository).findByStatusAndTypeAndName(any(), any(), any());
-//        List<Equipment> list = service.findByStatusTypeName(status, null, null);
-//
-//        assertNotNull(list);
-//        assertEquals(4, list.size());
-//        assertEquals("equipment 1", list.get(0).getName());
-//    }
 
-//    @Test
-//    void TestFindByStatusTypeNameToFilterWithStatusNotAvailable() {
-//        EquipmentStatus status = EquipmentStatus.UNAVAILABLE;
-//
-//        Mockito.doReturn(this.getMocksEquipments(status, null, null)).when(repository).findByStatusAndTypeAndName(any(), any(), any());
-//        List<Equipment> list = service.findByStatusTypeName(status, null, null);
-//
-//        assertNotNull(list);
-//        assertEquals(4, list.size());
-//        assertEquals("equipment 2", list.get(0).getName());
-//    }
-//
-//    @Test
-//    void TestFindByStatusTypeNameToFilterWithType() {
-//        Type type = Type.builder().id(1L).name("one").build();
-//
-//        Mockito.doReturn(this.getMocksEquipments(null, type, null)).when(repository).findByStatusAndTypeAndName(any(), any(), any());
-//        List<Equipment> list = service.findByStatusTypeName(null, type, null);
-//
-//        assertNotNull(list);
-//        assertEquals(2, list.size());
-//        assertEquals("equipment 1", list.get(0).getName());
-//        assertEquals("equipment 2", list.get(1).getName());
-//    }
+    @Test
+    void TestFindByStatusTypeNameToFilterWithNoAvailableDataMatch() {
+        Mockito.doReturn(this.getMocksEquipments(null, null, null)).when(repository).findByStatusAndTypeAndName(any(), any(), any());
+        List<Equipment> list = service.findByStatusTypeName(null, null, null);
 
-//    @Test
-//    void TestFindByStatusTypeNameToFilterWithAnotherType() {
-//        Type type = Type.builder().id(2L).name("two").build();
-//
-//        Mockito.doReturn(this.getMocksEquipments(null, type, null)).when(repository).findByStatusAndTypeAndName(any(), any(), any());
-//        List<Equipment> list = service.findByStatusTypeName(null, type, null);
-//
-//        assertNotNull(list);
-//        assertEquals(2, list.size());
-//        assertEquals("equipment 5", list.get(0).getName());
-//        assertEquals("equipment 6", list.get(1).getName());
-//    }
+        assertNotNull(list);
+        assertEquals(0, list.size());
+    }
 
-//    @Test
-//    void TestFindByStatusTypeNameToFilterWithAllFields() {
-//        String name = "5";
-//        EquipmentStatus status = EquipmentStatus.AVAILABLE;
-//        Type type = Type.builder().id(2L).name("two").build();
-//
-//        Mockito.doReturn(this.getMocksEquipments(status, type, name)).when(repository).findByStatusAndTypeAndName(any(), any(), any());
-//        List<Equipment> list = service.findByStatusTypeName(status, type, name);
-//
-//        assertNotNull(list);
-//        assertEquals(5, list.size());
-//    }
+    @Test
+    void TestFindByStatusTypeNameToFilterWithName() {
+        String name = "8";
 
+        Mockito.doReturn(this.getMocksEquipments(null, null, name)).when(repository).findByStatusAndTypeAndName(any(), any(), any());
+        List<Equipment> list = service.findByStatusTypeName(null, null, name);
+
+        assertNotNull(list);
+        assertEquals(1, list.size());
+        assertEquals("equipment 8", list.get(0).getName());
+    }
+
+    @Test
+    void TestFindByStatusTypeNameToFilterWithStatusAvailable() {
+        EquipmentStatus status = EquipmentStatus.AVAILABLE;
+
+        Mockito.doReturn(this.getMocksEquipments(status, null, null)).when(repository).findByStatusAndTypeAndName(any(), any(), any());
+        List<Equipment> list = service.findByStatusTypeName(status, null, null);
+
+        assertNotNull(list);
+        assertEquals(4, list.size());
+        assertEquals("equipment 1", list.get(0).getName());
+    }
+
+    @Test
+    void TestFindByStatusTypeNameToFilterWithStatusNotAvailable() {
+        EquipmentStatus status = EquipmentStatus.UNAVAILABLE;
+
+        Mockito.doReturn(this.getMocksEquipments(status, null, null)).when(repository).findByStatusAndTypeAndName(any(), any(), any());
+        List<Equipment> list = service.findByStatusTypeName(status, null, null);
+
+        assertNotNull(list);
+        assertEquals(4, list.size());
+        assertEquals("equipment 2", list.get(0).getName());
+    }
+
+    @Test
+    void TestFindByStatusTypeNameToFilterWithType() {
+        Type type = Type.builder().id(1L).name("one").build();
+
+        Mockito.doReturn(this.getMocksEquipments(null, type, null)).when(repository).findByStatusAndTypeAndName(any(), any(), any());
+        List<Equipment> list = service.findByStatusTypeName(null, type, null);
+
+        assertNotNull(list);
+        assertEquals(2, list.size());
+        assertEquals("equipment 1", list.get(0).getName());
+        assertEquals("equipment 2", list.get(1).getName());
+    }
+
+    @Test
+    void TestFindByStatusTypeNameToFilterWithAnotherType() {
+        Type type = Type.builder().id(2L).name("two").build();
+
+        Mockito.doReturn(this.getMocksEquipments(null, type, null)).when(repository).findByStatusAndTypeAndName(any(), any(), any());
+        List<Equipment> list = service.findByStatusTypeName(null, type, null);
+
+        assertNotNull(list);
+        assertEquals(2, list.size());
+        assertEquals("equipment 5", list.get(0).getName());
+        assertEquals("equipment 6", list.get(1).getName());
+    }
+
+    @Test
+    void TestFindByStatusTypeNameToFilterWithAllFields() {
+        String name = "5";
+        EquipmentStatus status = EquipmentStatus.AVAILABLE;
+        Type type = Type.builder().id(2L).name("two").build();
+
+        Mockito.doReturn(this.getMocksEquipments(status, type, name)).when(repository).findByStatusAndTypeAndName(any(), any(), any());
+        List<Equipment> list = service.findByStatusTypeName(status, type, name);
+
+        assertNotNull(list);
+        assertEquals(5, list.size());
+    }
 
     @Test
     void TestSaveEquipmentValidWithSuccess(){
@@ -157,11 +156,9 @@ class EquipmentServiceTest {
 
     }
 
-
     @Test
     void testSaveEquipmentWithNullName() {
     }
-
 
     @Test
     void testSaveEquipmentWithNegativePrice() {
@@ -169,13 +166,11 @@ class EquipmentServiceTest {
 
     }
 
-
     private List<Equipment> getMocksEquipments(){
         return equipments;
     }
-}
 
-//    private List<Equipment> getMocksEquipments(EquipmentStatus status, Type type, String string){
-//        return equipments.stream().filter(e -> (status != null && Objects.equals(e.getStatus(), status)) || (type != null && e.getType() != null && e.getType().equals(type)) || (string != null && e.getName().contains(string))).collect(Collectors.toList());
-//    }
-//}
+    private List<Equipment> getMocksEquipments(EquipmentStatus status, Type type, String string){
+        return equipments.stream().filter(e -> (status != null && Objects.equals(e.getStatus(), status)) || (e.getType() != null && e.getType().equals(type)) || (string != null && e.getName().contains(string))).collect(Collectors.toList());
+    }
+}
