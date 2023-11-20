@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/reserve")
 public class ReservationRest {
-    // start dade -- endddate -- total price = price of  equi * days -- id user --id equipment
     private ReservationService reservationService;
     public ReservationRest (ReservationService reservationService){
         this.reservationService = reservationService ;
