@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,6 +22,6 @@ public class Type {
     private String name;
 
     @OneToMany(mappedBy = "type", cascade = CascadeType.ALL)
-    private Set<Equipment> equipments;
+    private List<Equipment> Equipment;
 
 }

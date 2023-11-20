@@ -2,13 +2,12 @@ package com.example.RentalHive.web.rest;
 
 
 import com.example.RentalHive.Entities.Equipment;
-import com.example.RentalHive.Exceptions.EquipmentAlreadyExistsException;
+
 import com.example.RentalHive.Service.EquipmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Optional;
 
 @RestController
@@ -47,4 +46,19 @@ public class EquipmentRest {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getEquipmentById(@PathVariable Long id) {
+        try {
+            Optional<Equipment> optionalEquipment = equipmentService.findById(id);
+
+            if (optionalEquipment.isPresent()) {
+                Equipment equipment = optionalEquipment.get();
+                return ResponseEntity.ok(equipment);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }

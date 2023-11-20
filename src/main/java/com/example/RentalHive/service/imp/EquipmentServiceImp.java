@@ -12,7 +12,6 @@ import java.util.Optional;
 
 
 import static com.example.RentalHive.Helpers.EquipementValidation.validateEquipmentForSave;
-import static com.example.RentalHive.Helpers.EquipmentUpdater.updateEquipment;
 
 @Component @RequiredArgsConstructor
 public class EquipmentServiceImp implements EquipmentService {
@@ -36,17 +35,27 @@ public class EquipmentServiceImp implements EquipmentService {
   @Override
     public Equipment updateEntireEquipment(Equipment equipment){
 
-
-      validateEquipmentForSave(equipment);
-
       Optional<Equipment> optionalExistingEquipment = repository.findById(equipment.getId());
 
-      return updateEquipment(optionalExistingEquipment, equipment);
+      if (optionalExistingEquipment.isPresent()) {
+          Equipment existingEquipment = optionalExistingEquipment.get();
+
+          existingEquipment.setName(equipment.getName());
+          existingEquipment.setStatus(equipment.getStatus());
+          existingEquipment.setPrice(equipment.getPrice());
+
+          if (equipment.getType() != null) {
+              existingEquipment.setType(equipment.getType());
+          }
+
+          return repository.save(existingEquipment);
+      } else {
+          throw new IllegalArgumentException("Equipment not found with ID: " + equipment.getId());
+      }
   }
 
 
     @Override
-
     public Optional<Equipment> findById(Long id){
         return repository.findById(id);
     }
