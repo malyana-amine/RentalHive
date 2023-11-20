@@ -30,7 +30,7 @@ public class ReservationRest {
         return reservationService.save(reservation);
     }
 
-    @GetMapping("/")
+    @GetMapping("/getAll")
     public List<Reservation> getAllReservation(){
         return reservationService.getAllReservation();
     }
