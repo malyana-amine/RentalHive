@@ -1,4 +1,4 @@
-package com.example.RentalHive.service;
+package com.example.RentalHive.Service;
 
 import com.example.RentalHive.Entity.Users;
 import org.springframework.stereotype.Service;

@@ -1,8 +1,8 @@
-package com.example.RentalHive.service.imp;
+package com.example.RentalHive.Service.imp;
 
 import com.example.RentalHive.Entity.Equipment;
 import com.example.RentalHive.Entity.Type;
-import com.example.RentalHive.repository.EquipmentRepository;
+import com.example.RentalHive.Repository.EquipmentRepository;
 import com.example.RentalHive.Service.EquipmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -19,6 +19,7 @@ public class EquipmentServiceImp implements EquipmentService {
     public List<Equipment> findByStatusTypeName(Type type, String name) {
 //        return repository.findByStatusAndTypeAndName(status, type, name);
         return null;
+
     }
 
     @Override

@@ -2,8 +2,8 @@ package com.example.RentalHive;
 
 import com.example.RentalHive.Entity.Equipment;
 import com.example.RentalHive.Entity.Users;
-import com.example.RentalHive.repository.EquipmentRepository;
-import com.example.RentalHive.repository.UserRepository;
+import com.example.RentalHive.Repository.EquipmentRepository;
+import com.example.RentalHive.Repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

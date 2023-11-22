@@ -1,4 +1,4 @@
-package com.example.RentalHive.repository;
+package com.example.RentalHive.Repository;
 
 import com.example.RentalHive.Entity.Type;
 import org.springframework.data.jpa.repository.JpaRepository;
