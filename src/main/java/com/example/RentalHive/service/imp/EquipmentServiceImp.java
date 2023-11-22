@@ -1,9 +1,8 @@
 package com.example.RentalHive.Service.imp;
 
-import com.example.RentalHive.Entities.Equipment;
-import com.example.RentalHive.Entities.EquipmentStatus;
-import com.example.RentalHive.Entities.Type;
-import com.example.RentalHive.repository.EquipmentRepository;
+import com.example.RentalHive.Entity.Equipment;
+import com.example.RentalHive.Entity.Type;
+import com.example.RentalHive.Repository.EquipmentRepository;
 import com.example.RentalHive.Service.EquipmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -17,8 +16,10 @@ import static com.example.RentalHive.Helpers.EquipementValidation.validateEquipm
 public class EquipmentServiceImp implements EquipmentService {
     private final EquipmentRepository repository;
     @Override
-    public List<Equipment> findByStatusTypeName(EquipmentStatus status, Type type, String name) {
-        return repository.findByStatusAndTypeAndName(status, type, name);
+    public List<Equipment> findByStatusTypeName(Type type, String name) {
+//        return repository.findByStatusAndTypeAndName(status, type, name);
+        return null;
+
     }
 
     @Override
@@ -40,7 +41,6 @@ public class EquipmentServiceImp implements EquipmentService {
           Equipment existingEquipment = optionalExistingEquipment.get();
 
           existingEquipment.setName(equipment.getName());
-          existingEquipment.setStatus(equipment.getStatus());
           existingEquipment.setPrice(equipment.getPrice());
 
           if (equipment.getType() != null) {

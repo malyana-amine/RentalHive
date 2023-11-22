@@ -1,12 +1,9 @@
 package com.example.RentalHive;
 
-import com.example.RentalHive.Entities.Equipment;
-import com.example.RentalHive.Entities.Reservation;
-import com.example.RentalHive.Entities.Users;
-import com.example.RentalHive.repository.EquipmentRepository;
-import com.example.RentalHive.repository.ReservationRepository;
-import com.example.RentalHive.repository.UserRepository;
-import com.example.RentalHive.service.imp.ReservationServiceImp;
+import com.example.RentalHive.Entity.Equipment;
+import com.example.RentalHive.Entity.Users;
+import com.example.RentalHive.Repository.EquipmentRepository;
+import com.example.RentalHive.Repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -89,3 +86,4 @@ class ReservationServiceImpTest {
     }
 
 }
+

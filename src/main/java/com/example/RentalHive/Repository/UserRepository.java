@@ -1,6 +1,6 @@
-package com.example.RentalHive.repository;
+package com.example.RentalHive.Repository;
 
-import com.example.RentalHive.Entities.Users;
+import com.example.RentalHive.Entity.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

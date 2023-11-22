@@ -1,4 +1,4 @@
-package com.example.RentalHive.Entities;
+package com.example.RentalHive.Entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

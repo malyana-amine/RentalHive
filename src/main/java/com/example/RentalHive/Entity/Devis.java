@@ -1,4 +1,4 @@
-package com.example.RentalHive.Entities;
+package com.example.RentalHive.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,24 +6,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Reservation {
+public class Devis {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private Double totalPrice;
+    private Status status;
+    private Double priceTotal;
 
     @ManyToOne
-    private Users user;
+    private Demande demande;
 
-    @ManyToOne
-    private Equipment equipment;
 }

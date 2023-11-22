@@ -1,4 +1,4 @@
-package com.example.RentalHive.Entities;
+package com.example.RentalHive.Entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;

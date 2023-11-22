@@ -1,12 +1,12 @@
 package com.example.RentalHive.web.rest;
 
 
-import com.example.RentalHive.Entities.Equipment;
+import com.example.RentalHive.Entity.Equipment;
 
 import com.example.RentalHive.Entities.EquipmentStatus;
 import com.example.RentalHive.Entities.Type;
 import com.example.RentalHive.Service.EquipmentService;
-import com.example.RentalHive.service.TypeService;
+import com.example.RentalHive.Service.TypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

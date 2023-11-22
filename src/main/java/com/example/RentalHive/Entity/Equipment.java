@@ -1,4 +1,4 @@
-package com.example.RentalHive.Entities;
+package com.example.RentalHive.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
@@ -33,9 +33,8 @@ public class Equipment {
     private Type type;
 
 
-    private EquipmentStatus status;
-
     @Positive(message = "The rent can not be negative or zero")
     private Double price;
+    private String image;
 
 }
