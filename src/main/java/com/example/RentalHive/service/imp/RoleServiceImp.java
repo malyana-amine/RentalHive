@@ -1,6 +1,6 @@
 package com.example.RentalHive.Service.imp;
 
-import com.example.RentalHive.Entities.Role;
+import com.example.RentalHive.Entity.Role;
 import com.example.RentalHive.repository.RoleRepository;
 import com.example.RentalHive.service.RoleService;
 import lombok.RequiredArgsConstructor;

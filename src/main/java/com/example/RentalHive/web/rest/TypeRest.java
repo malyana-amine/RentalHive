@@ -1,6 +1,6 @@
 package com.example.RentalHive.web.rest;
 
-import com.example.RentalHive.Entities.Type;
+import com.example.RentalHive.Entity.Type;
 import com.example.RentalHive.service.TypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;

@@ -1,7 +1,7 @@
 package com.example.RentalHive.web.rest;
 
 
-import com.example.RentalHive.Entities.Equipment;
+import com.example.RentalHive.Entity.Equipment;
 
 import com.example.RentalHive.Service.EquipmentService;
 import lombok.RequiredArgsConstructor;

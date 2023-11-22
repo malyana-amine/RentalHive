@@ -1,4 +1,4 @@
-package com.example.RentalHive.Entities;
+package com.example.RentalHive.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,22 +6,23 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.time.LocalDate;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Type {
+public class DemandeEquipment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
 
-    @OneToMany(mappedBy = "type", cascade = CascadeType.ALL)
-    private List<Equipment> Equipment;
+    @ManyToOne
+    private Demande demande;
 
+    @ManyToOne
+    private Equipment equipment;
+    private LocalDate startDate;
+    private LocalDate endDate;
 }

@@ -1,12 +1,6 @@
 package com.example.RentalHive.Helpers;
 
-import com.example.RentalHive.Entities.Equipment;
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
-import jakarta.validation.ValidatorFactory;
-
-import java.util.Set;
+import com.example.RentalHive.Entity.Equipment;
 
 public class EquipementValidation {
 

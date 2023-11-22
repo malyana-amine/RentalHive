@@ -1,10 +1,9 @@
-package com.example.RentalHive.Service;
+package com.example.RentalHive.service;
 
-import com.example.RentalHive.Entities.Equipment;
-import com.example.RentalHive.Entities.EquipmentStatus;
-import com.example.RentalHive.Entities.Type;
+import com.example.RentalHive.Entity.Equipment;
+import com.example.RentalHive.Entity.Type;
 import com.example.RentalHive.repository.EquipmentRepository;
-import com.example.RentalHive.Service.imp.EquipmentServiceImp;
+import com.example.RentalHive.service.imp.EquipmentServiceImp;
 
 import org.junit.jupiter.api.Disabled;
 
@@ -16,8 +15,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -43,8 +40,8 @@ class EquipmentServiceTest {
 
     @Test
     void TestFindByStatusTypeNameToGetWithoutAnyFilter() {
-        Mockito.doReturn(this.getMocksEquipments()).when(repository).findByStatusAndTypeAndName(any(), any(), any());
-        List<Equipment> list = service.findByStatusTypeName(null, null, null);
+        Mockito.doReturn(this.getMocksEquipments()).when(repository).findByStatusAndTypeAndName(any(), any());
+        List<Equipment> list = service.findByStatusTypeName(null, null);
 
         assertNotNull(list);
         assertEquals(8, list.size());

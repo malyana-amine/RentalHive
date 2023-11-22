@@ -1,8 +1,7 @@
 package com.example.RentalHive.Service;
 
-import com.example.RentalHive.Entities.Equipment;
-import com.example.RentalHive.Entities.EquipmentStatus;
-import com.example.RentalHive.Entities.Type;
+import com.example.RentalHive.Entity.Equipment;
+import com.example.RentalHive.Entity.Type;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +13,7 @@ public interface EquipmentService {
 
     Equipment save(Equipment equipment);
 
-
-    List<Equipment> findByStatusTypeName(EquipmentStatus status, Type type, String name);
+    List<Equipment> findByStatusTypeName(Type type, String name);
 
     Equipment updateEntireEquipment(Equipment equipment);
 
