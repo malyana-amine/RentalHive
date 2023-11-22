@@ -1,4 +1,4 @@
-package com.example.RentalHive.Entity;
+package com.example.RentalHive.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
@@ -21,20 +21,19 @@ public class Equipment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotEmpty(message = "The name of equipment can not be empty")
     @NotNull(message = "The name of equipment can not be null")
     @NotBlank(message = "The name of equipment can not be blank")
     private String name;
 
+    @Positive(message = "The rent can not be negative or zero")
+    private Double price;
+
+    private String image;
+
     @ManyToOne
-    @JoinColumn(name = "type_id")
     @JsonBackReference
     @NotNull(message = "The type of the equipment can not be null")
     private Type type;
-
-
-    @Positive(message = "The rent can not be negative or zero")
-    private Double price;
-    private String image;
-
 }

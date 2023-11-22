@@ -1,4 +1,4 @@
-package com.example.RentalHive.Service;
+package com.example.RentalHive.service;
 
 import java.util.List;
 import java.util.Optional;

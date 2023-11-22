@@ -1,4 +1,4 @@
-package com.example.RentalHive.Entity;
+package com.example.RentalHive.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,13 +11,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Cantract {
+public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
-    private Devis devis;
-    private String signature;
-    private String description;
-    private String fichier;
+    private String username;
+    private String email;
+    private String password;
+
+    @ManyToOne
+    private Role role;
 }

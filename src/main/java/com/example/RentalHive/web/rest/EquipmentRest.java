@@ -1,18 +1,16 @@
 package com.example.RentalHive.web.rest;
 
 
-import com.example.RentalHive.Entity.Equipment;
+import com.example.RentalHive.entity.Equipment;
 
-import com.example.RentalHive.Entities.EquipmentStatus;
-import com.example.RentalHive.Entities.Type;
-import com.example.RentalHive.Service.EquipmentService;
-import com.example.RentalHive.Service.TypeService;
+import com.example.RentalHive.entity.Type;
+import com.example.RentalHive.service.EquipmentService;
+import com.example.RentalHive.service.TypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -70,14 +68,12 @@ public class EquipmentRest {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Equipment>> filterEquipments(@RequestParam(required = false) String status,
-                                                            @RequestParam(required = false, defaultValue = "-1") Long type,
+    public ResponseEntity<List<Equipment>> filterEquipments(@RequestParam(required = false, defaultValue = "-1") Long type,
                                                             @RequestParam(required = false) String name){
 
-        EquipmentStatus equipmentStatus = Arrays.stream(EquipmentStatus.values()).anyMatch(s -> s.name().equals(status)) ? EquipmentStatus.valueOf(status) : null;
         Type equipmentType = typeService.findById(type).orElse(null);
 
-        List<Equipment> list = equipmentService.findByStatusTypeName(equipmentStatus, equipmentType, name);
+        List<Equipment> list = equipmentService.findByStatusTypeName(equipmentType, name);
         return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 }

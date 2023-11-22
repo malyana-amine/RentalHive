@@ -1,6 +1,6 @@
-package com.example.RentalHive.Service;
+package com.example.RentalHive.service;
 
-import com.example.RentalHive.Entity.Type;
+import com.example.RentalHive.entity.Type;
 import org.springframework.stereotype.Service;
 
 @Service

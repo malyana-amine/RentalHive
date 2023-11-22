@@ -1,4 +1,4 @@
-package com.example.RentalHive.Entity;
+package com.example.RentalHive.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,14 +11,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Devis {
+public class Demand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Status status;
-    private Double priceTotal;
 
     @ManyToOne
-    private Demande demande;
-
+    private Users user;
 }

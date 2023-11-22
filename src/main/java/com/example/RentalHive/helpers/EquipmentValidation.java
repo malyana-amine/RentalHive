@@ -1,8 +1,8 @@
-package com.example.RentalHive.Helpers;
+package com.example.RentalHive.helpers;
 
-import com.example.RentalHive.Entity.Equipment;
+import com.example.RentalHive.entity.Equipment;
 
-public class EquipementValidation {
+public class EquipmentValidation {
 
     public static void validateEquipmentForSave(Equipment equipment) {
         if (equipment.getName() == null) {

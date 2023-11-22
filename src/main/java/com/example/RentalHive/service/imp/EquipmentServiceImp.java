@@ -1,16 +1,16 @@
-package com.example.RentalHive.Service.imp;
+package com.example.RentalHive.service.imp;
 
-import com.example.RentalHive.Entity.Equipment;
-import com.example.RentalHive.Entity.Type;
-import com.example.RentalHive.Repository.EquipmentRepository;
-import com.example.RentalHive.Service.EquipmentService;
+import com.example.RentalHive.entity.Equipment;
+import com.example.RentalHive.entity.Type;
+import com.example.RentalHive.repository.EquipmentRepository;
+import com.example.RentalHive.service.EquipmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 
 
-import static com.example.RentalHive.Helpers.EquipementValidation.validateEquipmentForSave;
+import static com.example.RentalHive.helpers.EquipmentValidation.validateEquipmentForSave;
 
 @Component @RequiredArgsConstructor
 public class EquipmentServiceImp implements EquipmentService {
@@ -58,7 +58,4 @@ public class EquipmentServiceImp implements EquipmentService {
     public Optional<Equipment> findById(Long id){
         return repository.findById(id);
     }
-
-
-
 }

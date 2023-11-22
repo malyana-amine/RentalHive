@@ -1,4 +1,4 @@
-package com.example.RentalHive.Entity;
+package com.example.RentalHive.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -23,5 +23,4 @@ public class Type {
     @OneToMany(mappedBy = "type", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Equipment> equipments;
-
 }
