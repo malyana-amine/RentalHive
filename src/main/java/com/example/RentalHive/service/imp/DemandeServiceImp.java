@@ -28,7 +28,7 @@ public class DemandeServiceImp implements DemandeService {
 
 
     @Override
-    public Demand CreateDemand(Long userId, List<Long> equipmentIds) {
+    public Demand CreateDemand(Long userId, List<Long> equipmentIds ,  List<LocalDate> startDateList , List<LocalDate> endDateList) {
 
         if (userId == null) {
             throw new IllegalArgumentException("User ID must not be null");
@@ -37,16 +37,21 @@ public class DemandeServiceImp implements DemandeService {
         Users user = userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found with ID: " + userId));
 
-
         Demand demand = new Demand();
         demand.setUser(user);
         demand.setStatus(Status.Pending);
 
-
         demand = demandRepository.save(demand);
 
+        if (equipmentIds.size() != startDateList.size() || startDateList.size() != endDateList.size()) {
+            throw new IllegalArgumentException("Sizes of equipmentIds, startDateList, and endDateList must match");
+        }
 
-        for (Long equipmentId : equipmentIds) {
+        for (int i = 0; i < equipmentIds.size(); i++) {
+            Long equipmentId = equipmentIds.get(i);
+            LocalDate startDate = startDateList.get(i);
+            LocalDate endDate = endDateList.get(i);
+
             Equipment equipment = equipmentRepository.findById(equipmentId)
                     .orElseThrow(() -> new EntityNotFoundException("Equipment not found"));
 
@@ -54,14 +59,11 @@ public class DemandeServiceImp implements DemandeService {
             demandedEquipment.setDemand(demand);
             demandedEquipment.setEquipment(equipment);
 
-
-            demandedEquipment.setStartDate(LocalDate.now());
-            demandedEquipment.setEndDate(LocalDate.now().plusDays(7)); // Adjust as needed
-
+            demandedEquipment.setStartDate(startDate);
+            demandedEquipment.setEndDate(endDate);
 
             demandEquipmentRepository.save(demandedEquipment);
         }
-
 
         return demand;
     }
