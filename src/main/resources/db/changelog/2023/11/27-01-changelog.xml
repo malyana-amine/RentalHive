@@ -5,20 +5,122 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd"
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
-    <changeSet id="1701079150805-5" author="adel (generated)">
-        <dropForeignKeyConstraint baseTableName="users_reservations" constraintName="fkt6vkeyji6trbwuxhvq3700fy5"/>
+    <changeSet id="1701079470517-1" author="viet (generated)">
+        <createTable tableName="contract">
+            <column name="devis_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_contract"/>
+            </column>
+            <column name="signature" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="file" type="VARCHAR(255)"/>
+        </createTable>
     </changeSet>
-    <changeSet id="1701079150805-7" author="adel (generated)">
-        <dropTable cascadeConstraints="true" tableName="users_reservations"/>
+    <changeSet id="1701079470517-2" author="viet (generated)">
+        <createTable tableName="demand">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_demand"/>
+            </column>
+            <column name="status" type="SMALLINT"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
     </changeSet>
-    <changeSet id="1701079150805-8" author="adel (generated)">
-        <dropColumn columnName="id" tableName="contract"/>
+    <changeSet id="1701079470517-3" author="viet (generated)">
+        <createTable tableName="demanded_equipment">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_demandedequipment"/>
+            </column>
+            <column name="start_date" type="date"/>
+            <column name="end_date" type="date"/>
+            <column name="demand_id" type="BIGINT"/>
+            <column name="equipment_id" type="BIGINT"/>
+        </createTable>
     </changeSet>
-    <changeSet id="1701079150805-1" author="adel (generated)">
-        <addNotNullConstraint columnDataType="BIGINT" columnName="devis_id" tableName="contract" validate="true"/>
+    <changeSet id="1701079470517-4" author="viet (generated)">
+        <createTable tableName="devis">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_devis"/>
+            </column>
+            <column name="status" type="SMALLINT"/>
+            <column name="price_total" type="FLOAT8"/>
+            <column name="demand_id" type="BIGINT"/>
+        </createTable>
     </changeSet>
-    <changeSet id="1701079150805-3" author="adel (generated)">
-        <addPrimaryKey columnNames="devis_id" constraintName="pk_contract" tableName="contract"/>
+    <changeSet id="1701079470517-5" author="viet (generated)">
+        <createTable tableName="equipment">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_equipment"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="FLOAT8"/>
+            <column name="type_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1701079470517-6" author="viet (generated)">
+        <createTable tableName="role">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_role"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1701079470517-7" author="viet (generated)">
+        <createTable tableName="type">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_type"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1701079470517-8" author="viet (generated)">
+        <createTable tableName="users">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_users"/>
+            </column>
+            <column name="username" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="role_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1701079470517-9" author="viet (generated)">
+        <addForeignKeyConstraint baseColumnNames="devis_id" baseTableName="contract"
+                                 constraintName="fk_contract_on_devis" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="devis"/>
+    </changeSet>
+    <changeSet id="1701079470517-10" author="viet (generated)">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="demand" constraintName="fk_demand_on_user"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
+                                 referencedTableName="users"/>
+    </changeSet>
+    <changeSet id="1701079470517-11" author="viet (generated)">
+        <addForeignKeyConstraint baseColumnNames="demand_id" baseTableName="demanded_equipment"
+                                 constraintName="fk_demandedequipment_on_demand" onDelete="NO ACTION"
+                                 onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="demand"/>
+    </changeSet>
+    <changeSet id="1701079470517-12" author="viet (generated)">
+        <addForeignKeyConstraint baseColumnNames="equipment_id" baseTableName="demanded_equipment"
+                                 constraintName="fk_demandedequipment_on_equipment" onDelete="NO ACTION"
+                                 onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="equipment"/>
+    </changeSet>
+    <changeSet id="1701079470517-13" author="viet (generated)">
+        <addForeignKeyConstraint baseColumnNames="demand_id" baseTableName="devis" constraintName="fk_devis_on_demand"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
+                                 referencedTableName="demand"/>
+    </changeSet>
+    <changeSet id="1701079470517-14" author="viet (generated)">
+        <addForeignKeyConstraint baseColumnNames="type_id" baseTableName="equipment"
+                                 constraintName="fk_equipment_on_type" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="type"/>
+    </changeSet>
+    <changeSet id="1701079470517-15" author="viet (generated)">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="users" constraintName="fk_users_on_role"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
+                                 referencedTableName="role"/>
     </changeSet>
 
 </databaseChangeLog>

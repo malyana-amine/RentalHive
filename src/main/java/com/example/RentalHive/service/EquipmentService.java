@@ -2,6 +2,7 @@ package com.example.RentalHive.service;
 
 import com.example.RentalHive.entity.Equipment;
 import com.example.RentalHive.entity.Type;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,5 +18,8 @@ public interface EquipmentService {
 
     Equipment updateEntireEquipment(Equipment equipment);
 
+
     Optional<Equipment>  findById(Long id);
+
+    Optional<Equipment> findByIdWithTypeInfo(Long id);
 }
