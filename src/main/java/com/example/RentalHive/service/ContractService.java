@@ -1,4 +1,4 @@
-package com.example.RentalHive.Service;
+package com.example.RentalHive.service;
 
 import com.example.RentalHive.entity.Contract;
 import org.springframework.data.crossstore.ChangeSetPersister;

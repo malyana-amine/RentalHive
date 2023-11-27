@@ -1,6 +1,6 @@
-package com.example.RentalHive.Service.imp;
+package com.example.RentalHive.service.imp;
 
-import com.example.RentalHive.Service.ContractService;
+import com.example.RentalHive.service.ContractService;
 import com.example.RentalHive.entity.Contract;
 import com.example.RentalHive.repository.ContractRepsitory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,8 @@
-package com.example.RentalHive.Service.imp;
+package com.example.RentalHive.service.imp;
 
 import com.example.RentalHive.DTO.ContractDTO;
 import com.example.RentalHive.DTO.DevisDTO;
-import com.example.RentalHive.Service.EntityDTOConverterService;
+import com.example.RentalHive.service.EntityDTOConverterService;
 import com.example.RentalHive.entity.Contract;
 import com.example.RentalHive.entity.Devis;
 import org.modelmapper.ModelMapper;
