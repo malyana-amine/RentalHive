@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1701079150805-5" author="adel (generated)">
+        <dropForeignKeyConstraint baseTableName="users_reservations" constraintName="fkt6vkeyji6trbwuxhvq3700fy5"/>
+    </changeSet>
+    <changeSet id="1701079150805-7" author="adel (generated)">
+        <dropTable cascadeConstraints="true" tableName="users_reservations"/>
+    </changeSet>
+    <changeSet id="1701079150805-8" author="adel (generated)">
+        <dropColumn columnName="id" tableName="contract"/>
+    </changeSet>
+    <changeSet id="1701079150805-1" author="adel (generated)">
+        <addNotNullConstraint columnDataType="BIGINT" columnName="devis_id" tableName="contract" validate="true"/>
+    </changeSet>
+    <changeSet id="1701079150805-3" author="adel (generated)">
+        <addPrimaryKey columnNames="devis_id" constraintName="pk_contract" tableName="contract"/>
+    </changeSet>
+
+</databaseChangeLog>

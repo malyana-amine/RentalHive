@@ -25,11 +25,11 @@ public class EquipmentRest {
     @PostMapping("/add")
     public ResponseEntity<Equipment> addEquipment( @RequestParam(required = false) String name,
                                                    @RequestParam(required = false) Double price,
-                                                   @RequestParam(required = false) Long typeId,  // Assuming type is identified by an ID
+                                                   @RequestParam(required = false) Long typeId,
                                                    @RequestParam(required = false) MultipartFile imageFile) {
 
         try {
-            // Create an Equipment object from the request parameters
+
             Equipment equipment = Equipment.builder()
                     .name(name)
                     .price(price)
