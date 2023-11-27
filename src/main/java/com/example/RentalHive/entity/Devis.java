@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -17,7 +19,8 @@ public class Devis {
     private Long id;
     private Status status;
     private Double priceTotal;
-
+    private Date dateCreation;
+    private Date dateExpiration;
     @ManyToOne
     private Demand demand;
 }
