@@ -1,5 +1,6 @@
 package com.example.RentalHive.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,5 +21,8 @@ public class Contract {
     private String file;
 
     @OneToOne
+    @MapsId
+    @JoinColumn(name = "devis_id", nullable = false, unique = true)
+//    @JsonIgnoreProperties("contract")
     private Devis devis;
 }
