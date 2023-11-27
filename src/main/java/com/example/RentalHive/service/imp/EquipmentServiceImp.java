@@ -6,6 +6,10 @@ import com.example.RentalHive.repository.EquipmentRepository;
 import com.example.RentalHive.service.EquipmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,10 +27,14 @@ public class EquipmentServiceImp implements EquipmentService {
     }
 
     @Override
-     public Equipment save(Equipment equipment){
+     public Equipment save(Equipment equipment, MultipartFile imageFile) throws IOException {
+        List<Equipment> existingEquipments = repository.findAll();
+        validateEquipmentForSave(equipment,existingEquipments);
 
-        validateEquipmentForSave(equipment);
+        String imagePath = "C:\\Users\\adel\\Desktop\\imagesSpring\\" + imageFile.getOriginalFilename();
+        imageFile.transferTo(new File(imagePath));
 
+        equipment.setImage(imagePath);
         return repository.save(equipment);
     }
 
