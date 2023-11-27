@@ -10,6 +10,8 @@ import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.Path;
+
 @RestController
 @RequestMapping("/api/contracts")
 public class ContractRest {
@@ -32,10 +34,15 @@ public class ContractRest {
         ContractDTO contractDTO = converterService.convertToDTO(contract);
         return ResponseEntity.ok(contractDTO);
     }
-    @PostMapping ("/add")
-    public ResponseEntity<ContractDTO> saveContract(@RequestBody Contract contract1) throws ChangeSetPersister.NotFoundException {
-        Contract contract = contractService.saveContract(contract1);
-        ContractDTO contractDTO = converterService.convertToDTO(contract);
+    @PostMapping ("/add/{id}")
+    public ResponseEntity<ContractDTO> saveContract(@RequestBody Contract contract1, @PathVariable Long id) throws ChangeSetPersister.NotFoundException {
+        // Assuming contractService.saveContract returns the saved contract
+        Contract savedContract = contractService.saveContract(contract1,id);
+
+        // Convert the saved contract to DTO
+        ContractDTO contractDTO = converterService.convertToDTO(savedContract);
+
+        // Return the ResponseEntity with the DTO and HTTP status OK
         return ResponseEntity.ok(contractDTO);
     }
 }
