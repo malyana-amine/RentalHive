@@ -1,4 +1,4 @@
-package com.example.RentalHive.Service;
+package com.example.RentalHive.service;
 
 import com.example.RentalHive.DTO.ContractDTO;
 import com.example.RentalHive.DTO.DevisDTO;

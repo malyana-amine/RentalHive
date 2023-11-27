@@ -1,8 +1,8 @@
 package com.example.RentalHive.web.rest;
 
 import com.example.RentalHive.DTO.ContractDTO;
-import com.example.RentalHive.Service.ContractService;
-import com.example.RentalHive.Service.EntityDTOConverterService;
+import com.example.RentalHive.service.ContractService;
+import com.example.RentalHive.service.EntityDTOConverterService;
 import com.example.RentalHive.entity.Contract;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

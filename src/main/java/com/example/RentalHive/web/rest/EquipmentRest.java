@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,9 +23,20 @@ public class EquipmentRest {
     private final TypeService typeService;
 
     @PostMapping("/add")
-    public ResponseEntity<Equipment> addEquipment(@RequestBody Equipment equipment) {
+    public ResponseEntity<Equipment> addEquipment( @RequestParam(required = false) String name,
+                                                   @RequestParam(required = false) Double price,
+                                                   @RequestParam(required = false) Long typeId,  // Assuming type is identified by an ID
+                                                   @RequestParam(required = false) MultipartFile imageFile) {
+
         try {
-            Equipment savedEquipment = equipmentService.save(equipment);
+            // Create an Equipment object from the request parameters
+            Equipment equipment = Equipment.builder()
+                    .name(name)
+                    .price(price)
+                    .type(Type.builder().id(typeId).build())
+                    .build();
+
+            Equipment savedEquipment = equipmentService.save(equipment, imageFile);
 
             return new ResponseEntity<>(savedEquipment, HttpStatus.CREATED);
 

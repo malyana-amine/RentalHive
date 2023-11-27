@@ -1,5 +1,10 @@
 package com.example.RentalHive.repository;
 
+
+import com.example.RentalHive.entity.Demand;
+import com.example.RentalHive.entity.DemandedEquipment;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import com.example.RentalHive.entity.DemandedEquipment;
 import com.example.RentalHive.entity.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,6 +13,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 
+@Repository
 public interface DemandEquipmentRepository extends JpaRepository<DemandedEquipment, Long> {
     @Query("SELECT COUNT(de) = 0 " +
             "FROM DemandedEquipment de " +
