@@ -1,6 +1,7 @@
 package com.example.RentalHive.service.imp;
 
 import com.example.RentalHive.entity.Devis;
+import com.example.RentalHive.entity.Status;
 import com.example.RentalHive.repository.DevisRepository;
 import com.example.RentalHive.service.ContractService;
 import com.example.RentalHive.entity.Contract;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Component;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Component
@@ -31,11 +33,24 @@ public class ContractServiceImp implements ContractService {
     }
 
     @Override
-    public Contract saveContract(Contract contract , Long id) {
+    public Contract saveContract(Contract contract, Long id) {
+        Optional<Devis> devisOptional = devisRepository.findById(id);
 
-        Optional<Devis> devis = devisRepository.findById(id);
+        if (devisOptional.isPresent()) {
+            Devis devis = devisOptional.get();
 
-        contract.setDevis(devis.get());
-        return contractRepository.save(contract);
+            // Check if the Devis status is Approved
+            if (devis.getStatus() == Status.Approved) {
+                contract.setDevis(devis);
+                return contractRepository.save(contract);
+            } else {
+                // Throw an exception or handle the case where the Devis status is not Approved
+                throw new IllegalStateException("Cannot save contract for Devis with status: " + devis.getStatus());
+            }
+        } else {
+            // Handle the case where the Devis with the specified ID is not found
+            throw new NoSuchElementException("Devis with ID " + id + " not found");
+        }
     }
+
 }
