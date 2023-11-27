@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Contract {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String signature;
     private String description;
@@ -21,7 +20,6 @@ public class Contract {
 
     @OneToOne
     @MapsId
-    @JoinColumn(name = "devis_id", nullable = false, unique = true)
-//    @JsonIgnoreProperties("contract")
+    @JoinColumn(name = "devis_id")
     private Devis devis;
 }

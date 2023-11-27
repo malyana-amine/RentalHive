@@ -1,7 +1,5 @@
 package com.example.RentalHive.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,10 +21,12 @@ public class Devis {
     private Double priceTotal;
     private Date dateCreation;
     private Date dateExpiration;
+
     @ManyToOne
     private Demand demand;
 
-
-
+    @OneToOne(mappedBy = "devis")
+    @PrimaryKeyJoinColumn
+    private Contract contract;
 
 }

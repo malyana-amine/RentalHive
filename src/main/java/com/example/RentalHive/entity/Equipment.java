@@ -1,15 +1,13 @@
 package com.example.RentalHive.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -33,7 +31,10 @@ public class Equipment {
     private String image;
 
     @ManyToOne
-    @JsonBackReference
     @NotNull(message = "The type of the equipment can not be null")
     private Type type;
+
+    @OneToMany(mappedBy = "equipment")
+    @ToString.Exclude
+    private List<DemandedEquipment> demandedEquipments;
 }
