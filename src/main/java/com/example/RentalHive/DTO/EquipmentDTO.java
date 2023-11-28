@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UsersDTO {
+public class EquipmentDTO {
     private Long id;
-    private String username;
-    private String email;
-    private String password;
+    private String name;
+    private Double price;
+    private String image;
+    private TypeDTO type;
 }
-

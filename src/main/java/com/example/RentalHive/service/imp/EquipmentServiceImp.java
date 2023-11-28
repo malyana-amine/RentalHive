@@ -1,9 +1,9 @@
-package com.example.RentalHive.Service.imp;
+package com.example.RentalHive.service.imp;
 
 import com.example.RentalHive.entity.Equipment;
 import com.example.RentalHive.entity.Type;
 import com.example.RentalHive.repository.EquipmentRepository;
-import com.example.RentalHive.Service.EquipmentService;
+import com.example.RentalHive.service.EquipmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,7 +21,7 @@ public class EquipmentServiceImp implements EquipmentService {
     private final EquipmentRepository repository;
     @Override
     public List<Equipment> findByStatusTypeName(Type type, String name) {
-//        return repository.findByStatusAndTypeAndName(status, type, name);
+        // return repository.findByStatusAndTypeAndName(status, type, name);
         return null;
 
     }
@@ -65,5 +65,9 @@ public class EquipmentServiceImp implements EquipmentService {
     @Override
     public Optional<Equipment> findById(Long id){
         return repository.findById(id);
+    }
+
+    public Optional<Equipment> findByIdWithTypeInfo(Long id) {
+        return repository.findByIdWithTypeInfo(id);
     }
 }

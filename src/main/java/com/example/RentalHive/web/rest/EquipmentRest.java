@@ -1,7 +1,7 @@
 package com.example.RentalHive.web.rest;
 
 
-import com.example.RentalHive.Service.EquipmentService;
+import com.example.RentalHive.service.EquipmentService;
 import com.example.RentalHive.entity.Equipment;
 
 import com.example.RentalHive.entity.Type;
@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,15 +26,15 @@ public class EquipmentRest {
     @PostMapping("/add")
     public ResponseEntity<Equipment> addEquipment( @RequestParam(required = false) String name,
                                                    @RequestParam(required = false) Double price,
-                                                   @RequestParam(required = false) Long typeId,  // Assuming type is identified by an ID
+                                                   @RequestParam(required = false) Long type_id,
                                                    @RequestParam(required = false) MultipartFile imageFile) {
 
         try {
-            // Create an Equipment object from the request parameters
+
             Equipment equipment = Equipment.builder()
                     .name(name)
                     .price(price)
-                    .type(Type.builder().id(typeId).build())
+                    .type(Type.builder().id(type_id).build())
                     .build();
 
             Equipment savedEquipment = equipmentService.save(equipment, imageFile);
@@ -52,15 +53,37 @@ public class EquipmentRest {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Equipment> updateEquipment(@RequestBody Equipment updatedEquipment) {
+    public ResponseEntity<Equipment> updateEquipment( @RequestParam Long equipmentId,
+                                                      @RequestParam(required = false) String name,
+                                                      @RequestParam(required = false) Double price,
+                                                      @RequestParam(required = false) MultipartFile imageFile) {
+
         try {
-            Equipment result = equipmentService.updateEntireEquipment(updatedEquipment);
-            return new ResponseEntity<>(result, HttpStatus.OK);
+            Equipment existingEquipment = equipmentService.findById(equipmentId)
+                    .orElseThrow(() -> new IllegalArgumentException("Equipment not found"));
+
+            if (name != null) {
+                existingEquipment.setName(name);
+            }
+
+            if (price != null) {
+                existingEquipment.setPrice(price);
+            }
+            if (imageFile != null && !imageFile.isEmpty()) {
+                String imagePath = "C:\\Users\\adel\\Desktop\\imagesSpring\\" + imageFile.getOriginalFilename();
+                imageFile.transferTo(new File(imagePath));
+                existingEquipment.setImage(imagePath);
+            }
+
+            Equipment updatedEquipment = equipmentService.updateEntireEquipment(existingEquipment);
+            return new ResponseEntity<>(updatedEquipment, HttpStatus.OK);
+
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
     }
 
     @GetMapping("/{id}")

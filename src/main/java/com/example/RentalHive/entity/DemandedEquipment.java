@@ -1,5 +1,7 @@
 package com.example.RentalHive.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,6 +23,7 @@ public class DemandedEquipment {
     private LocalDate endDate;
 
     @ManyToOne
+    @JsonIgnore
     private Demand demand;
 
     @ManyToOne
