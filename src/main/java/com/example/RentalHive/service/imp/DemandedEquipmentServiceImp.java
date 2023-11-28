@@ -52,6 +52,10 @@ public class DemandedEquipmentServiceImp implements DemandedEquipmentService {
 
     @Override
     public Boolean isThisDemandedEquipmentAllowed(DemandedEquipment demandedEquipment) {
+        if (demandedEquipment.getEndDate().isBefore(demandedEquipment.getStartDate()) || demandedEquipment.getEndDate().isAfter(demandedEquipment.getStartDate().plusDays(30))) {
+            throw new IllegalArgumentException("End date must be greater than start date and not greater than 30 days.");
+        }
+
         return repository.isThisDemandedEquipmentAllowed(demandedEquipment.getEquipment().getId(), Status.Approved, demandedEquipment.getStartDate(), demandedEquipment.getEndDate());
     }
 }
