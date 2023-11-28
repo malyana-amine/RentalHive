@@ -31,7 +31,7 @@ public class EquipmentServiceImp implements EquipmentService {
         List<Equipment> existingEquipments = repository.findAll();
         validateEquipmentForSave(equipment,existingEquipments);
 
-        String imagePath = "C:\\Users\\adel\\Desktop\\imagesSpring\\" + imageFile.getOriginalFilename();
+        String imagePath = "C:\\Users\\Youcode\\Desktop\\imagesSpring\\" + imageFile.getOriginalFilename();
         imageFile.transferTo(new File(imagePath));
 
         equipment.setImage(imagePath);

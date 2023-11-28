@@ -68,4 +68,9 @@ public class DemandeServiceImp implements DemandeService {
         return demand;
     }
 
+    @Override
+    public Optional<Demand> findById(Long id) {
+        return demandRepository.findById(id);
+    }
+
 }

@@ -6,5 +6,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface DevisService {
-    Devis generateDevis(Devis devis);
+    Devis generateDevis(Long id);
 }
