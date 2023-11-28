@@ -1,10 +1,10 @@
 package com.example.RentalHive.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,11 +24,11 @@ public class Demand {
     @OneToMany(mappedBy = "demand")
     @ToString.Exclude
     @JsonIgnore
-    private List<DemandedEquipment> demandedEquipments;
+    private List<DemandedEquipment> demandedEquipments  = new ArrayList<>();;
 
     @OneToMany(mappedBy = "demand")
     @ToString.Exclude
     @JsonIgnore
-    private List<Devis> devisList;
+    private List<Devis> devisList  = new ArrayList<>();;
 
 }

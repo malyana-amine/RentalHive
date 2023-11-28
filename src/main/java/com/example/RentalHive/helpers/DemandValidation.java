@@ -58,6 +58,8 @@ public class DemandValidation {
             demandedEquipment.setStartDate(startDate);
             demandedEquipment.setEndDate(endDate);
 
+            demand.getDemandedEquipments().add(demandedEquipment);
+
             demandEquipmentRepository.save(demandedEquipment);
         }
     }

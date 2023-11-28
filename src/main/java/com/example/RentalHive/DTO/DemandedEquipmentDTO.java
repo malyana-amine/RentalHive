@@ -15,6 +15,5 @@ public class DemandedEquipmentDTO {
     private Long id;
     private LocalDate startDate;
     private LocalDate endDate;
-    private DemandDTO demand;
     private EquipmentDTO equipment;
 }

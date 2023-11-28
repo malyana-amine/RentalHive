@@ -1,5 +1,6 @@
 package com.example.RentalHive.DTO;
 
+import com.example.RentalHive.entity.DemandedEquipment;
 import com.example.RentalHive.entity.Status;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,9 +16,8 @@ import java.util.List;
 @Builder
 public class DemandDTO {
     private Long id;
-    private List<Long> equipmentIds;
-    private List<LocalDate> startDateList;
-    private List<LocalDate> endDateList;
     private Status status;
     private UsersDTO user;
+    private List<DemandedEquipmentDTO> demandedEquipments;
+    private List<DevisDTO> devisList;
 }
