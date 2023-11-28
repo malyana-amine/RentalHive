@@ -27,7 +27,7 @@ public class PDFGenerator {
         fontTitle.setSize(20);
 
         // Creating paragraph
-        Paragraph paragraph1 = new Paragraph("List of the Students", fontTitle);
+        Paragraph paragraph1 = new Paragraph("Contract Details", fontTitle);
 
         // Aligning the paragraph in the document
         paragraph1.setAlignment(Paragraph.ALIGN_CENTER);
@@ -35,12 +35,12 @@ public class PDFGenerator {
         // Adding the created paragraph in the document
         document.add(paragraph1);
 
-        // Creating a table of the 3 columns
-        PdfPTable table = new PdfPTable(3);
+        // Creating a table of the 5 columns (including User and Total Price)
+        PdfPTable table = new PdfPTable(5);
 
         // Setting width of the table, its columns and spacing
         table.setWidthPercentage(100f);
-        table.setWidths(new int[]{3, 3, 3});
+        table.setWidths(new int[]{1, 2, 2, 2, 2});
         table.setSpacingBefore(5);
 
         // Create Table Cells for the table header
@@ -59,15 +59,23 @@ public class PDFGenerator {
         // Adding Cell to table
         cell.setPhrase(new Phrase("ID", font));
         table.addCell(cell);
-        cell.setPhrase(new Phrase("Student Name", font));
+        cell.setPhrase(new Phrase("Signature", font));
         table.addCell(cell);
-        cell.setPhrase(new Phrase("Email", font));
+        cell.setPhrase(new Phrase("Description", font));
+        table.addCell(cell);
+        cell.setPhrase(new Phrase("User", font));
+        table.addCell(cell);
+        cell.setPhrase(new Phrase("Total Price", font));
         table.addCell(cell);
 
-        // Adding student data
+        // Adding contract data
         table.addCell(String.valueOf(contract.getId()));
-        table.addCell(contract.getDescription());
         table.addCell(contract.getSignature());
+        table.addCell(contract.getDescription());
+
+        // Adding user name and total price
+        table.addCell(contract.getDevis().getDemand().getUser().getUsername());
+        table.addCell(String.valueOf(contract.getDevis().getPriceTotal()));
 
         document.add(table);
 
@@ -77,4 +85,5 @@ public class PDFGenerator {
         // Close the writer
         writer.close();
     }
+
 }

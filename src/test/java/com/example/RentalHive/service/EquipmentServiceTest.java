@@ -3,7 +3,7 @@ package com.example.RentalHive.service;
 import com.example.RentalHive.entity.Equipment;
 import com.example.RentalHive.entity.Type;
 import com.example.RentalHive.repository.EquipmentRepository;
-import com.example.RentalHive.service.imp.EquipmentServiceImp;
+import com.example.RentalHive.Service.imp.EquipmentServiceImp;
 
 import org.junit.jupiter.api.Disabled;
 

@@ -1,8 +1,8 @@
-package com.example.RentalHive.service.imp;
+package com.example.RentalHive.Service.imp;
 
 import com.example.RentalHive.entity.Users;
 import com.example.RentalHive.repository.UserRepository;
-import com.example.RentalHive.service.UserService;
+import com.example.RentalHive.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
