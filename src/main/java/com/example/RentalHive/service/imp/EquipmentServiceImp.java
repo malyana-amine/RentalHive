@@ -1,9 +1,9 @@
-package com.example.RentalHive.service.imp;
+package com.example.RentalHive.Service.imp;
 
 import com.example.RentalHive.entity.Equipment;
 import com.example.RentalHive.entity.Type;
 import com.example.RentalHive.repository.EquipmentRepository;
-import com.example.RentalHive.service.EquipmentService;
+import com.example.RentalHive.Service.EquipmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
