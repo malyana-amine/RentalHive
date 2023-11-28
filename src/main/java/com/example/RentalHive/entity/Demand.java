@@ -21,12 +21,14 @@ public class Demand {
     @ManyToOne
     private Users user;
 
-    @OneToMany(mappedBy = "demand",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "demand")
     @ToString.Exclude
+    @JsonIgnore
     private List<DemandedEquipment> demandedEquipments;
 
-    @OneToMany(mappedBy = "demand",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "demand")
     @ToString.Exclude
+    @JsonIgnore
     private List<Devis> devisList;
 
 }

@@ -30,13 +30,11 @@ public class Equipment {
     private String image;
 
     @ManyToOne
-    @ToString.Exclude
-    @JsonIgnore
+    @NotNull(message = "The type of the equipment can not be null")
     private Type type;
 
-    @OneToMany(mappedBy = "equipment",fetch = FetchType.LAZY)
-    @JsonIgnore
+    @OneToMany(mappedBy = "equipment")
     @ToString.Exclude
+    @JsonIgnore
     private List<DemandedEquipment> demandedEquipments;
-
 }

@@ -1,11 +1,8 @@
 package com.example.RentalHive.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -20,7 +17,8 @@ public class Type {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "type", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "type")
+    @ToString.Exclude
+    @JsonIgnore
     private List<Equipment> equipments;
 }
