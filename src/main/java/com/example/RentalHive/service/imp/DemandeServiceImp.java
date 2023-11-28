@@ -1,6 +1,7 @@
 package com.example.RentalHive.service.imp;
 
 import com.example.RentalHive.entity.*;
+import com.example.RentalHive.repository.DemandeRepository;
 import com.example.RentalHive.service.DemandeService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,12 @@ import com.example.RentalHive.helpers.DemandValidation;
 public class DemandeServiceImp implements DemandeService {
 
     private final DemandValidation demandValidation;
+    private final DemandeRepository demandeRepository;
 
     @Autowired
-    public DemandeServiceImp(DemandValidation demandValidation) {
+    public DemandeServiceImp(DemandValidation demandValidation, DemandeRepository demandeRepository) {
         this.demandValidation = demandValidation;
+        this.demandeRepository = demandeRepository;
     }
     @Override
     public Demand CreateDemand(Long userId, List<Long> equipmentIds ,  List<LocalDate> startDateList , List<LocalDate> endDateList) {
@@ -30,6 +33,11 @@ public class DemandeServiceImp implements DemandeService {
             demandValidation.createDemandedEquipments(demand, equipmentIds, startDateList, endDateList);
             return demand;
 
+    }
+
+    @Override
+    public List<Demand> findAll() {
+        return demandeRepository.findAll();
     }
 
 }

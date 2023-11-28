@@ -17,4 +17,5 @@ public interface EntityDTOConverterService {
     UsersDTO convertUserToDTO(Optional<Users> user);
     EquipmentDTO convertEquipmentToDTO(Optional<Equipment> equipment);
     public DemandedEquipmentDTO convertToDTO(DemandedEquipment demandedEquipment);
+    List<DemandDTO> convertToDTOList(List<Demand> demands);
 }

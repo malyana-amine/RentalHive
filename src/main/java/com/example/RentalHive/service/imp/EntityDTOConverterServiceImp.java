@@ -67,5 +67,12 @@ public class EntityDTOConverterServiceImp implements EntityDTOConverterService {
         return equipment.map(e -> modelMapper.map(e, EquipmentDTO.class)).orElse(null);
     }
 
+    public List<DemandDTO> convertToDTOList(List<Demand> demands) {
+        return demands.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+
 
 }

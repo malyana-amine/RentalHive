@@ -39,4 +39,14 @@ public class DemandRest {
         return  ResponseEntity.ok(demandDTO);
     }
 
+    @GetMapping("/")
+    public ResponseEntity<List<DemandDTO>> getDemandDTO(){
+        List<Demand> demandList = demandeService.findAll();
+        List<DemandDTO> demandDTOList =converterService.convertToDTOList(demandList);
+
+
+
+        return ResponseEntity.ok(demandDTOList);
+    }
+
 }
