@@ -1,10 +1,6 @@
 package com.example.RentalHive.web.rest;
 
-import com.example.RentalHive.DTO.DemandDTO;
-import com.example.RentalHive.entity.Demand;
 import com.example.RentalHive.entity.Devis;
-import com.example.RentalHive.entity.Equipment;
-import com.example.RentalHive.entity.Role;
 import com.example.RentalHive.service.DevisService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -12,8 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
