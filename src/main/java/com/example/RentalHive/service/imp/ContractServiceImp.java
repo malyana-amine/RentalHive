@@ -1,5 +1,6 @@
 package com.example.RentalHive.service.imp;
 
+import com.example.RentalHive.Util.PDFGenerator;
 import com.example.RentalHive.entity.Devis;
 import com.example.RentalHive.entity.Status;
 import com.example.RentalHive.repository.DevisRepository;
@@ -10,6 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -33,7 +39,7 @@ public class ContractServiceImp implements ContractService {
     }
 
     @Override
-    public Contract saveContract(Contract contract, Long id) {
+    public Contract saveContract(Contract contract, Long id) throws IOException {
         Optional<Devis> devisOptional = devisRepository.findById(id);
 
         if (devisOptional.isPresent()) {
@@ -42,13 +48,27 @@ public class ContractServiceImp implements ContractService {
             // Check if the Devis status is Approved
             if (devis.getStatus() == Status.Approved) {
                 contract.setDevis(devis);
+
+                // Set up the file path to save the PDF
+                DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD_HH-MM-SS");
+                String currentDateTime = dateFormat.format(new Date());
+                String filePath = "PDFs/" + currentDateTime + ".pdf";
+//        String filePath = "com/example/RentalHive/Util/" + currentDateTime + ".pdf";
+                File file = new File(filePath);
+                file.getParentFile().mkdirs();
+
+                PDFGenerator generator = new PDFGenerator();
+
+                generator.generate(contract, filePath);
+
+                contract.setFile(filePath);
+
+
                 return contractRepository.save(contract);
             } else {
-                // Throw an exception or handle the case where the Devis status is not Approved
                 throw new IllegalStateException("Cannot save contract for Devis with status: " + devis.getStatus());
             }
         } else {
-            // Handle the case where the Devis with the specified ID is not found
             throw new NoSuchElementException("Devis with ID " + id + " not found");
         }
     }
