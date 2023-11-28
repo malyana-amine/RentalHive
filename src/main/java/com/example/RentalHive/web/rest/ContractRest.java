@@ -1,11 +1,10 @@
 package com.example.RentalHive.web.rest;
 
 import com.example.RentalHive.DTO.ContractDTO;
-import com.example.RentalHive.Util.PDFGenerator;
 import com.example.RentalHive.service.ContractService;
 import com.example.RentalHive.service.EntityDTOConverterService;
 import com.example.RentalHive.entity.Contract;
-import com.lowagie.text.DocumentException;
+
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,10 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @RestController
 @RequestMapping("/api/contracts")
@@ -28,7 +23,6 @@ public class ContractRest {
     @Autowired
     @Qualifier("entityDTOConverterService")
     private final EntityDTOConverterService converterService;
-
 
     public ContractRest(ContractService contractService, @Qualifier("entityDTOConverterService") EntityDTOConverterService converterService) {
         this.contractService = contractService;
@@ -41,39 +35,16 @@ public class ContractRest {
         ContractDTO contractDTO = converterService.convertToDTO(contract);
         return ResponseEntity.ok(contractDTO);
     }
-    @PostMapping ("/add/{id}")
-    public ResponseEntity<ContractDTO> saveContract(@RequestBody Contract contract1, @PathVariable Long id,HttpServletResponse response) throws ChangeSetPersister.NotFoundException, IOException {
+
+    @PostMapping("/add/{id}")
+    public ResponseEntity<ContractDTO> saveContract(@RequestBody Contract contract1, @PathVariable Long id, HttpServletResponse response) throws ChangeSetPersister.NotFoundException, IOException {
         // Assuming contractService.saveContract returns the saved contract
-        Contract savedContract = contractService.saveContract(contract1,id);
+        Contract savedContract = contractService.saveContract(contract1, id);
 
         // Convert the saved contract to DTO
         ContractDTO contractDTO = converterService.convertToDTO(savedContract);
 
-        response.setContentType("application/pdf");
-        DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD:HH:MM:SS");
-        String currentDateTime = dateFormat.format(new Date());
-        String headerkey = "Content-Disposition";
-        String headervalue = "attachment; filename=student" + currentDateTime + ".pdf";
-        response.setHeader(headerkey, headervalue);
-        Contract listofStudents = contractService.getContractById(id);
-        PDFGenerator generator = new PDFGenerator();
-        generator.generate(listofStudents, response);
-
         // Return the ResponseEntity with the DTO and HTTP status OK
         return ResponseEntity.ok(contractDTO);
     }
-
-//    @GetMapping("/export-to-pdf")
-//    public void generatePdfFile(HttpServletResponse response) throws DocumentException, IOException, ChangeSetPersister.NotFoundException {
-//        response.setContentType("application/pdf");
-//        DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD:HH:MM:SS");
-//        String currentDateTime = dateFormat.format(new Date());
-//        String headerkey = "Content-Disposition";
-//        String headervalue = "attachment; filename=student" + currentDateTime + ".pdf";
-//        response.setHeader(headerkey, headervalue);
-//        Contract listofStudents = contractService.getContractById(1L);
-//        PDFGenerator generator = new PDFGenerator();
-//        generator.generate(listofStudents, response);
-//
-//    }
 }

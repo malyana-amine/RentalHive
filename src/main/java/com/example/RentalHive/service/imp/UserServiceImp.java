@@ -1,6 +1,5 @@
 package com.example.RentalHive.service.imp;
 
-import com.example.RentalHive.DTO.RoleDTO;
 import com.example.RentalHive.DTO.UsersDTO;
 import com.example.RentalHive.entity.Users;
 import com.example.RentalHive.repository.UserRepository;
