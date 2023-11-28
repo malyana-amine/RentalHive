@@ -1,4 +1,4 @@
-package com.example.RentalHive.Service;
+package com.example.RentalHive.service;
 
 import com.example.RentalHive.entity.Equipment;
 import com.example.RentalHive.entity.Type;

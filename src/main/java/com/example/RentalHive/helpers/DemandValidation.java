@@ -5,6 +5,7 @@ import com.example.RentalHive.repository.DemandEquipmentRepository;
 import com.example.RentalHive.repository.DemandeRepository;
 import com.example.RentalHive.repository.EquipmentRepository;
 import com.example.RentalHive.repository.UserRepository;
+import com.example.RentalHive.service.DemandedEquipmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +22,8 @@ public class DemandValidation {
     private final UserRepository userRepository;
     private final EquipmentRepository equipmentRepository;
     private final DemandEquipmentRepository demandEquipmentRepository;
+    private final DemandedEquipmentService demandedEquipmentService;
+
 
     public void validateInputs(Long userId, List<Long> equipmentIds, List<LocalDate> startDateList, List<LocalDate> endDateList) {
         if (userId == null) {
@@ -51,17 +54,22 @@ public class DemandValidation {
             LocalDate endDate = endDateList.get(i);
 
             Equipment equipment = getEquipmentById(equipmentId);
-
             DemandedEquipment demandedEquipment = new DemandedEquipment();
             demandedEquipment.setDemand(demand);
             demandedEquipment.setEquipment(equipment);
             demandedEquipment.setStartDate(startDate);
             demandedEquipment.setEndDate(endDate);
 
-            demand.getDemandedEquipments().add(demandedEquipment);
+            if (demandedEquipmentService.isThisDemandedEquipmentAllowed(demandedEquipment)) {
+                throw new IllegalArgumentException("Equipment is not available for the specified period.");
+            }else{
+                demand.getDemandedEquipments().add(demandedEquipment);
 
-            demandEquipmentRepository.save(demandedEquipment);
+                demandEquipmentRepository.save(demandedEquipment);
+            }
         }
+
+
     }
 
     public Equipment getEquipmentById(Long equipmentId) {

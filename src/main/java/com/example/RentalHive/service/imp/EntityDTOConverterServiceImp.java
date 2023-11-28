@@ -5,12 +5,9 @@ import com.example.RentalHive.entity.*;
 import com.example.RentalHive.service.EntityDTOConverterService;
 import com.example.RentalHive.service.EquipmentService;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +20,7 @@ public class EntityDTOConverterServiceImp implements EntityDTOConverterService {
 
     private final ModelMapper modelMapper;
 
-    private final   EquipmentService equipmentService;
+    private final  EquipmentService equipmentService;
     public EntityDTOConverterServiceImp(ModelMapper modelMapper , EquipmentService equipmentService) {
         this.modelMapper = modelMapper;
         this.equipmentService = equipmentService;

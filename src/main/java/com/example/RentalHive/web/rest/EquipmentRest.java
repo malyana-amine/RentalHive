@@ -1,7 +1,7 @@
 package com.example.RentalHive.web.rest;
 
 
-import com.example.RentalHive.Service.EquipmentService;
+import com.example.RentalHive.service.EquipmentService;
 import com.example.RentalHive.entity.Equipment;
 
 import com.example.RentalHive.entity.Type;
