@@ -34,9 +34,9 @@ public class ContractServiceImp implements ContractService {
     }
 
     public Contract getContractById(Long id) throws ChangeSetPersister.NotFoundException {
-//        return contractRepository.findById(id)
+
         return  contractRepository.findContractWithDetails(id);
-//                .orElseThrow(() -> new ChangeSetPersister.NotFoundException());
+
     }
 
     @Override
