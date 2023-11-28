@@ -28,5 +28,4 @@ public class Devis {
     @OneToOne(mappedBy = "devis")
     @PrimaryKeyJoinColumn
     private Contract contract;
-
 }
