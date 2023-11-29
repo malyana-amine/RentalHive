@@ -44,9 +44,6 @@ public class DevisServiceImp implements DevisService {
         devis.setPriceTotal(sum);
         devis.setStatus(Status.Pending);
 
-        //devisRepository.getApprovedDemand(demand.getStatus().name(), demand.getUser().getUsername());
-
-
         return devisRepository.save(devis);
     }
 
