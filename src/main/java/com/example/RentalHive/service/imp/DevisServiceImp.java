@@ -1,5 +1,6 @@
 package com.example.RentalHive.service.imp;
 
+import com.example.RentalHive.DTO.DemandDTO;
 import com.example.RentalHive.entity.Demand;
 import com.example.RentalHive.entity.Devis;
 import com.example.RentalHive.entity.Status;
@@ -23,7 +24,7 @@ public class DevisServiceImp implements DevisService {
     @Override
     public Devis generateDevis(Long id) {
 
-        Demand demand = demandeService.findById(id).orElseThrow();
+        DemandDTO demand = demandeService.findById(id).orElseThrow();
         if (demand.getStatus() != Status.Approved) {
             throw new IllegalArgumentException("This demand is not approved !!");
         }
