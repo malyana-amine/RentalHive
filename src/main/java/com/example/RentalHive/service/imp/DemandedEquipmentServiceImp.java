@@ -7,6 +7,7 @@ import com.example.RentalHive.service.DemandedEquipmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,10 +53,22 @@ public class DemandedEquipmentServiceImp implements DemandedEquipmentService {
 
     @Override
     public Boolean isThisDemandedEquipmentAllowed(DemandedEquipment demandedEquipment) {
-        if (demandedEquipment.getEndDate().isBefore(demandedEquipment.getStartDate()) || demandedEquipment.getEndDate().isAfter(demandedEquipment.getStartDate().plusDays(30))) {
+        LocalDate today = LocalDate.now();
+
+        if (demandedEquipment.getStartDate() == null || demandedEquipment.getStartDate().isBefore(today)) {
+            throw new IllegalArgumentException("Start date must be today or later.");
+        }
+
+        if (demandedEquipment.getEndDate() == null ||
+                demandedEquipment.getEndDate().isBefore(demandedEquipment.getStartDate()) ||
+                demandedEquipment.getEndDate().isAfter(demandedEquipment.getStartDate().plusDays(30))) {
             throw new IllegalArgumentException("End date must be greater than start date and not greater than 30 days.");
         }
 
-        return repository.isThisDemandedEquipmentAllowed(demandedEquipment.getEquipment().getId(), Status.Approved, demandedEquipment.getStartDate(), demandedEquipment.getEndDate());
+        if (!repository.isThisDemandedEquipmentAllowed(demandedEquipment.getEquipment().getId(), Status.Approved, demandedEquipment.getStartDate(), demandedEquipment.getEndDate())) {
+            throw new IllegalArgumentException("you cannot demand this equipment: " + demandedEquipment.getEquipment().getId() + " in this period.");
+        }
+
+        return true;
     }
 }
