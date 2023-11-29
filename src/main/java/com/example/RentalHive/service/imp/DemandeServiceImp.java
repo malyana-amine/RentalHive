@@ -18,14 +18,14 @@ import java.util.stream.Collectors;
 
 @Component
 public class DemandeServiceImp implements DemandeService {
-    private final DemandeRepository repository;
     private final ModelMapper mapper;
     private final UserService userService;
     private final DemandValidation demandValidation;
+    @Autowired
+    private  DemandeRepository demandeRepository;
 
     @Autowired
-    public DemandeServiceImp(DemandeRepository repository, ModelMapper mapper, UserService userService, DemandValidation demandValidation) {
-        this.repository = repository;
+    public DemandeServiceImp(ModelMapper mapper, UserService userService, DemandValidation demandValidation) {
         this.mapper = mapper;
         this.userService = userService;
         this.demandValidation = demandValidation;
@@ -44,7 +44,7 @@ public class DemandeServiceImp implements DemandeService {
 
     @Override
     public List<DemandDTO> findAll() {
-        return repository
+        return demandeRepository
                 .findAll()
                 .stream()
                 .map(demand -> mapper.map(demand, DemandDTO.class))
@@ -53,7 +53,7 @@ public class DemandeServiceImp implements DemandeService {
 
     @Override
     public Optional<DemandDTO> findById(Long aLong) {
-        return repository
+        return demandeRepository
                 .findById(aLong)
                 .map(demand -> mapper.map(demand, DemandDTO.class));
     }
@@ -66,7 +66,7 @@ public class DemandeServiceImp implements DemandeService {
                 .findById(demand.getUser().getId())
                 .orElseThrow(() -> new RuntimeException("user not found"));
 
-        Demand saved = repository.save(demand);
+        Demand saved = demandeRepository.save(demand);
         return mapper.map(saved, DemandDTO.class);
     }
 }
