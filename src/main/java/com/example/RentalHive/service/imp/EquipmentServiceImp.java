@@ -21,9 +21,7 @@ public class EquipmentServiceImp implements EquipmentService {
     private final EquipmentRepository repository;
     @Override
     public List<Equipment> findByStatusTypeName(Type type, String name) {
-        // return repository.findByStatusAndTypeAndName(status, type, name);
-        return null;
-
+         return repository.findByTypeAndName(type, name);
     }
 
     @Override
@@ -31,10 +29,12 @@ public class EquipmentServiceImp implements EquipmentService {
         List<Equipment> existingEquipments = repository.findAll();
         validateEquipmentForSave(equipment,existingEquipments);
 
-        String imagePath = "C:\\Users\\Youcode\\Desktop\\imagesSpring\\" + imageFile.getOriginalFilename();
-        imageFile.transferTo(new File(imagePath));
+        String filePath = "imagesSpring/" + imageFile.getOriginalFilename();
+        File file = new File(filePath);
 
-        equipment.setImage(imagePath);
+        imageFile.transferTo(file.getParentFile());
+
+        equipment.setImage(filePath);
         return repository.save(equipment);
     }
 

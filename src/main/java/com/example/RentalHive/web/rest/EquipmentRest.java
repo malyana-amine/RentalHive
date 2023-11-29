@@ -24,7 +24,7 @@ public class EquipmentRest {
     private final TypeService typeService;
 
     @PostMapping("/add")
-    public ResponseEntity<Equipment> addEquipment( @RequestParam(required = false) String name,
+    public ResponseEntity<?> addEquipment( @RequestParam(required = false) String name,
                                                    @RequestParam(required = false) Double price,
                                                    @RequestParam(required = false) Long type_id,
                                                    @RequestParam(required = false) MultipartFile imageFile) {
@@ -43,7 +43,7 @@ public class EquipmentRest {
 
         } catch (IllegalArgumentException e) {
 
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 
         } catch (Exception e) {
 
@@ -70,9 +70,12 @@ public class EquipmentRest {
                 existingEquipment.setPrice(price);
             }
             if (imageFile != null && !imageFile.isEmpty()) {
-                String imagePath = "C:\\Users\\adel\\Desktop\\imagesSpring\\" + imageFile.getOriginalFilename();
-                imageFile.transferTo(new File(imagePath));
-                existingEquipment.setImage(imagePath);
+                String filePath = "imagesSpring/" + imageFile.getOriginalFilename();
+                File file = new File(filePath);
+
+                imageFile.transferTo(file.getParentFile());
+
+                existingEquipment.setImage(filePath);
             }
 
             Equipment updatedEquipment = equipmentService.updateEntireEquipment(existingEquipment);

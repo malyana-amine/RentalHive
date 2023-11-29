@@ -1,7 +1,7 @@
 package com.example.RentalHive.service;
 
+import com.example.RentalHive.DTO.DemandDTO;
 import com.example.RentalHive.entity.Demand;
-import com.example.RentalHive.entity.DemandedEquipment;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -13,5 +13,7 @@ import java.util.Optional;
 public interface DemandeService  {
 
     Demand CreateDemand(Long userId, List<Long> equipmentIds,List<LocalDate> startDateList , List<LocalDate> endDateList);
-    Optional<Demand> findById(Long id);
+    List<DemandDTO> findAll();
+    Optional<DemandDTO> findById(Long aLong);
+    DemandDTO update(DemandDTO entityDTO);
 }
