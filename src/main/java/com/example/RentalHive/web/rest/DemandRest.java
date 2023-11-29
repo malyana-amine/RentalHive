@@ -2,8 +2,6 @@ package com.example.RentalHive.web.rest;
 
 import com.example.RentalHive.DTO.DemandDTO;
 import com.example.RentalHive.entity.Demand;
-import com.example.RentalHive.entity.DemandedEquipment;
-import com.example.RentalHive.service.ContractService;
 import com.example.RentalHive.service.DemandeService;
 import com.example.RentalHive.service.EntityDTOConverterService;
 import lombok.RequiredArgsConstructor;
@@ -28,15 +26,23 @@ public class DemandRest {
     @Qualifier("entityDTOConverterService")
     private final EntityDTOConverterService converterService;
     @PostMapping("/add")
-    public ResponseEntity<DemandDTO> createDemand(
+    public ResponseEntity<ApiResponse<DemandDTO>> createDemand(
           @RequestParam(required=false) Long userId,
           @RequestParam(required=false) List<Long> equipmentIds,
           @RequestParam(required=false) List<LocalDate> startDateList,
           @RequestParam(required=false) List<LocalDate> endDateList) {
 
-        Demand demand = demandeService.CreateDemand(userId,equipmentIds,startDateList,endDateList);
-        DemandDTO demandDTO = converterService.convertToDTO(demand);
-        return  ResponseEntity.ok(demandDTO);
-    }
+        try {
+            Demand demand = demandeService.CreateDemand(userId,equipmentIds,startDateList,endDateList);
+            DemandDTO demandDTO = converterService.convertToDTO(demand);
 
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(ApiResponse.success("demand created successful", demandDTO));
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(ApiResponse.error(e.getMessage()));
+        }
+    }
 }

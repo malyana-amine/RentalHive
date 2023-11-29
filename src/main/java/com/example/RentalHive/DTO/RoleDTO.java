@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class RoleDTO {
+    private Long id;
+
     @NotNull(message = "Name cannot be null")
     @NotEmpty(message = "Name cannot be empty")
     @Size(min = 3, max = 255, message = "Name must be between 3 and 255 characters")

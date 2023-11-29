@@ -60,7 +60,7 @@ public class DemandValidation {
             demandedEquipment.setStartDate(startDate);
             demandedEquipment.setEndDate(endDate);
 
-            if (demandedEquipmentService.isThisDemandedEquipmentAllowed(demandedEquipment)) {
+            if (!demandedEquipmentService.isThisDemandedEquipmentAllowed(demandedEquipment)) {
                 throw new IllegalArgumentException("Equipment is not available for the specified period.");
             }else{
                 demand.getDemandedEquipments().add(demandedEquipment);
