@@ -1,5 +1,4 @@
 package com.example.RentalHive.entity;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,5 +27,4 @@ public class Devis {
     @OneToOne(mappedBy = "devis")
     @PrimaryKeyJoinColumn
     private Contract contract;
-
 }

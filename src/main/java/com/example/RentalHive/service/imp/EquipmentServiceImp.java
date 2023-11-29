@@ -21,7 +21,7 @@ public class EquipmentServiceImp implements EquipmentService {
     private final EquipmentRepository repository;
     @Override
     public List<Equipment> findByStatusTypeName(Type type, String name) {
-//        return repository.findByStatusAndTypeAndName(status, type, name);
+        // return repository.findByStatusAndTypeAndName(status, type, name);
         return null;
 
     }
@@ -65,5 +65,9 @@ public class EquipmentServiceImp implements EquipmentService {
     @Override
     public Optional<Equipment> findById(Long id){
         return repository.findById(id);
+    }
+
+    public Optional<Equipment> findByIdWithTypeInfo(Long id) {
+        return repository.findByIdWithTypeInfo(id);
     }
 }

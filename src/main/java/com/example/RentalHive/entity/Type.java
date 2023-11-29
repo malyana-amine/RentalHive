@@ -1,5 +1,6 @@
 package com.example.RentalHive.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,5 +19,6 @@ public class Type {
 
     @OneToMany(mappedBy = "type")
     @ToString.Exclude
+    @JsonIgnore
     private List<Equipment> equipments;
 }

@@ -1,8 +1,10 @@
 package com.example.RentalHive.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,9 +23,12 @@ public class Demand {
 
     @OneToMany(mappedBy = "demand")
     @ToString.Exclude
-    private List<DemandedEquipment> demandedEquipments;
+    @JsonIgnore
+    private List<DemandedEquipment> demandedEquipments  = new ArrayList<>();;
 
     @OneToMany(mappedBy = "demand")
     @ToString.Exclude
-    private List<Devis> devisList;
+    @JsonIgnore
+    private List<Devis> devisList  = new ArrayList<>();;
+
 }
