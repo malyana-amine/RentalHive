@@ -26,7 +26,6 @@ public class DevisServiceImp implements DevisService {
     private final DevisRepository devisRepository;
     private final DemandeService demandeService;
     private final ModelMapper modelMapper;
-   // private final Function<Devis, DevisDTO> mapDevisToDto = (element) -> modelMapper.map(element, DevisDTO.class);
 
     @Override
     public Devis generateDevis(Long id) {
@@ -36,13 +35,12 @@ public class DevisServiceImp implements DevisService {
         if (demand.getStatus() != Status.Approved) {
             throw new IllegalArgumentException("This demand is not approved !!");
         }
-        /* ** Set the expiration date to 24 hours from the current date ** */
+
+        Devis devis = new Devis();
+
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
         calendar.add(Calendar.HOUR_OF_DAY, 24);
-
-
-        Devis devis = new Devis();
 
         devis.setDateCreation(new Date());
         devis.setDateExpiration(calendar.getTime());
@@ -78,5 +76,17 @@ public class DevisServiceImp implements DevisService {
                 })
                 .collect(Collectors.toList());
     }
-
+    @Override
+    public  List<Demand> findApprovedDemand(){
+        return devisRepository
+                .findApprovedDemand()
+                .stream()
+                .collect(Collectors.toList());
+    }
+    @Override
+    public void accepteDevis(Long id){
+        Devis pendingDevis = devisRepository.findPendingDevisById(id);
+        pendingDevis.setStatus(Status.Approved);
+        devisRepository.save(pendingDevis);
+    }
 }
