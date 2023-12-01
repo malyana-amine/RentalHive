@@ -13,4 +13,6 @@ public interface DevisService {
     Devis generateDevis(Long id);
     List<DevisDTO> findAll();
     void verifyAndUpdateStatus();
+    List<Demand> findApprovedDemand();
+    void accepteDevis(Long id);
 }
