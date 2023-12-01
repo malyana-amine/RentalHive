@@ -1,4 +1,5 @@
 package com.example.RentalHive.entity;
+import com.example.RentalHive.DTO.DemandDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
