@@ -14,6 +14,5 @@ public class ContractDTO {
     private String signature;
     private String description;
     private String file;
-    private DevisDTO devis;
 
 }
