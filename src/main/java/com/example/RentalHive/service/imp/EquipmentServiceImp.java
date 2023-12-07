@@ -9,7 +9,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,12 +33,15 @@ public class EquipmentServiceImp implements EquipmentService {
         List<Equipment> existingEquipments = repository.findAll();
         validateEquipmentForSave(equipment,existingEquipments);
 
-        String filePath = "imagesSpring/" + imageFile.getOriginalFilename();
-        File file = new File(filePath);
+        String imgName = imageFile.getOriginalFilename();
 
-        imageFile.transferTo(file.getParentFile());
+        File upl = new File("imagesSpring/" + imgName);
+        upl.createNewFile();
+        FileOutputStream fout = new FileOutputStream(upl);
+        fout.write(imageFile.getBytes());
+        fout.close();
 
-        equipment.setImage(filePath);
+        equipment.setImage(imgName);
         return repository.save(equipment);
     }
 
