@@ -74,6 +74,11 @@ public class EquipmentServiceImp implements EquipmentService {
         return repository.findById(id);
     }
 
+    @Override
+    public List<Equipment> findAll(){
+        return repository.findAll();
+    }
+
     public Optional<Equipment> findByIdWithTypeInfo(Long id) {
         return repository.findByIdWithTypeInfo(id);
     }

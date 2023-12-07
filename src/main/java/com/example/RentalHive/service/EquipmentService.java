@@ -21,5 +21,7 @@ public interface EquipmentService {
 
     Optional<Equipment>  findById(Long id);
 
+    List<Equipment> findAll();
+
     Optional<Equipment> findByIdWithTypeInfo(Long id);
 }

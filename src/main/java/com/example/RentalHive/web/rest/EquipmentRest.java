@@ -23,6 +23,16 @@ public class EquipmentRest {
     private final EquipmentService equipmentService;
     private final TypeService typeService;
 
+    @GetMapping("")
+    public ResponseEntity<List<Equipment>> getAllEquipments() {
+        try {
+            List<Equipment> equipments = equipmentService.findAll();
+            return ResponseEntity.ok(equipments);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
     @PostMapping("/add")
     public ResponseEntity<?> addEquipment( @RequestParam(required = false) String name,
                                                    @RequestParam(required = false) Double price,
