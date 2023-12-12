@@ -8,11 +8,18 @@ import com.example.RentalHive.entity.Contract;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Paths;
 
 @RestController
 @RequestMapping("/api/contracts")
@@ -30,10 +37,15 @@ public class ContractRest {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ContractDTO> getContract(@PathVariable Long id) throws ChangeSetPersister.NotFoundException {
+    public ResponseEntity<?> getContract(@PathVariable Long id) throws ChangeSetPersister.NotFoundException, MalformedURLException {
         Contract contract = contractService.getContractById(id);
         ContractDTO contractDTO = converterService.convertToDTO(contract);
-        return ResponseEntity.ok(contractDTO);
+//        return ResponseEntity.ok(contractDTO);
+
+        Resource resource = new UrlResource(Paths.get(contractDTO.getFile()).toUri());
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        return new ResponseEntity<>(resource, headers, HttpStatus.OK);
     }
 
     @PostMapping("/add/{id}")
